@@ -1,0 +1,23 @@
+---
+import Icons from "lucide";
+
+interface Props {
+  icon: keyof typeof Icons;
+  class?: string
+}
+
+const { props } = Astro;
+
+const icon = Icons[props.icon];
+const [, attributes, children] = icon as (typeof Icons)["X"]; // I'm dead inside
+const componentChildren = children // I'm even more dead inside
+  ?.map(
+    ([child, attributes]) =>
+      `<${child} ${Object.entries(attributes)
+        .map(([k, v]) => `${k}="${v}"`)
+        .join(" ")} />`,
+  )
+  .join("\n");
+---
+
+<svg {...attributes} set:html={componentChildren} class={props.class} />

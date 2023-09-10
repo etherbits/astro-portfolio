@@ -17,6 +17,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  lucide:
+    specifier: ^0.276.0
+    version: 0.276.0
   tailwind-merge:
     specifier: ^1.14.0
     version: 1.14.0
@@ -2006,6 +2009,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yallist: 4.0.0
+    dev: false
+
+  /lucide@0.276.0:
+    resolution: {integrity: sha512-3Igkc+LjRX8lrzD0Eg79yvXexNuHibX0fPuPSoroQH1D4yKZj57Xxe1fZ8EFIoN564zQR80kee/tMmArXMhXuA==}
     dev: false
 
   /magic-string@0.30.3:

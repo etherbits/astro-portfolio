@@ -77,9 +77,9 @@ export const ui = {
     "navigation.projects": "პროქეტები",
     "navigation.journey": "ჩემი გზა",
     "navigation.contact": "კონტაქტი",
-    "home.greet_start": "გამარჯობა! მე ვარ",
+    "home.greet_start": "გამარჯობა! მე ვარ ",
     "home.greet_name": "ნიკა",
-    "home.greet_end": "",
+    "home.greet_end": " ",
     "home.profession": "ვებ დეველოპერი",
     "home.skill_paragraph": `მე ვაწყობ რესპონსიულ, ოპტიმიზირებულ და ინკლუზიურ ქსელურ პროგრამებს მოწინავე ვებ ტექნოლოგიების 
                             გამოყენებით, სასიამოვნო ციფრული გამოცდილებების შესაქმნელად`,

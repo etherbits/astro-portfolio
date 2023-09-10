@@ -42,7 +42,20 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
 
         btn.style.transform = "translateY(16%) scale(1)";
       });
+      btnContainer.addEventListener("touchstart", () => {
+        const btn = btnContainer.querySelector(
+          "[outline-button]",
+        ) as HTMLButtonElement;
+
+        btn.style.transform = "translateY(16%) scale(1)";
+      });
       document.addEventListener("mouseup", () => {
+        const btn = btnContainer.querySelector(
+          "[outline-button]",
+        ) as HTMLButtonElement;
+        btn.style.transform = "";
+      });
+      document.addEventListener("touchend", () => {
         const btn = btnContainer.querySelector(
           "[outline-button]",
         ) as HTMLButtonElement;

@@ -1,6 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import OutlineText from "../components/OutlineText.astro";
+import { getLangFromUrl, generateTranslator } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = generateTranslator(lang);
 ---
 
 <Layout title="Welcome to Astro.">
@@ -8,27 +12,24 @@ import { getCollection } from "astro:content";
     <div
       class="flex max-w-full flex-col items-center justify-center text-center sm:mt-[3vh] md:mt-[7vh]"
     >
-      <div>
-        <!-- <ProfileImage class="mb-8 sm:h-28 sm:w-28 md:h-40 md:w-40" /> -->
-
         <img
           src="https://github.com/etherbits.png?size=200"
           width={200}
           height={200}
           alt="profile"
-          class="h-20 w-20 rounded-full"
+          class="mb-8 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
         />
-      </div>
       <p class="mb-4 text-[26px] text-slate-200 sm:text-clamp-3xl">
-        Hello there! I'm
-        <span class="text-blue-200">Nika</span>{" "}
-         a
+        {t("home.greet_start")}
+        <span class="text-blue-200">{t("home.greet_name")}</span>
+        {t("home.greet_end")}
       </p>
-      <div>Web Developer</div>
+      <OutlineText dropCount={1}>{t("home.profession")}</OutlineText>
       <p
-        class="mb-16 mt-8 max-w-[320px] text-sm leading-9 text-slate-300 sm:max-w-clamp-xs sm:text-clamp-xl sm:leading-clamp-xl"
+        class="mb-16 mt-8 max-w-[320px] text-sm leading-9 text-slate-300
+        sm:max-w-clamp-xs sm:text-clamp-xl sm:leading-clamp-xl"
       >
-        i do things
+        {t("home.skill_paragraph")}
       </p>
       <a href="/projects" class="mb-11">
         <!-- <Button class="sm:clamp-xl text-base">{t("intro_button")}</Button> -->
@@ -36,65 +37,3 @@ import { getCollection } from "astro:content";
     </div>
   </main>
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-</style>

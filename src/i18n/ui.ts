@@ -11,8 +11,8 @@ export const ui = {
     "navigation.projects": "Projects",
     "navigation.journey": "Journey",
     "navigation.contact": "Contact Me",
-    "home.greet_start": "Hello there! I'm",
-    "home.greet_name": "Nika",
+    "home.greet_start": "Hello there! I'm ",
+    "home.greet_name": "Nika ",
     "home.greet_end": "a",
     "home.profession": "Web Developer",
     "home.skill_paragraph": `I build responsive, optimized, and 

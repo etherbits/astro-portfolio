@@ -2,7 +2,7 @@
 import Button from "../../components/Button.astro";
 import Layout from "../../layouts/Layout.astro";
 import OutlineText from "../../components/OutlineText.astro";
-import RectLinks from '../../components/RectLinks.astro'
+import RectLinks from "../../components/RectLinks.astro";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import { languages } from "../../i18n/ui";
 
@@ -22,9 +22,11 @@ const t = generateTranslator(lang);
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="bg-black relative z-0">
-    <div
-      class="flex max-w-full flex-col items-center justify-center text-center sm:mt-[3vh] md:mt-[7vh]"
+  <div
+    class="flex h-full w-full flex-grow flex-col items-center justify-between p-6 sm:px-8 sm:pb-16"
+  >
+    <main
+      class="flex max-w-full flex-col items-center justify-center text-center mb-auto sm:mt-[3vh] md:mt-[7vh]"
     >
       <img
         src="https://github.com/etherbits.png?size=200"
@@ -49,7 +51,7 @@ const t = generateTranslator(lang);
       <a href="/projects" class="mb-11">
         <Button>{t("home.nav_button")}</Button>
       </a>
-      <RectLinks size={48}/>
-    </div>
-  </main>
+    </main>
+    <RectLinks size={48} />
+  </div>
 </Layout>

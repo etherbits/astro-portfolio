@@ -22,7 +22,9 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-black text-slate-300 font-[montserrat]">
+  <body
+    class="flex flex-col bg-black overflow-x-hidden text-slate-300 font-[montserrat] tracking-wider sm:min-h-screen"
+  >
     <Header />
     <slot />
   </body>

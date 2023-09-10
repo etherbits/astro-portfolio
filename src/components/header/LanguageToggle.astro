@@ -4,7 +4,7 @@ import { languages } from "../../i18n/ui";
 const splitPathname = Astro.url.pathname.split("/");
 const currentLocale = splitPathname[1] as keyof typeof languages;
 
-const currentLanguage = languages[currentLocale]
+const currentLanguage = languages[currentLocale];
 
 const generateUrl = () => {
   splitPathname[1] = currentLocale === "en" ? "ka" : "en";

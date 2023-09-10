@@ -2,7 +2,7 @@
 import { cn } from "../utils/tailwind";
 import Icon from "./Icon.astro";
 interface Props {
-  class: string;
+  class?: string;
   size: number;
 }
 
@@ -42,7 +42,10 @@ const linkObjs = [
           aria-label="Resume/CV"
         >
           {link.imgType === "vector" ? (
-            <Icon icon="Newspaper" class="w-1/2 h-1/2 stroke-[1.5px] stroke-slate-500" />
+            <Icon
+              icon="Newspaper"
+              class="w-1/2 h-1/2 stroke-[1.5px] stroke-slate-500"
+            />
           ) : (
             <img src={link.imageSrc} alt="resume" />
           )}

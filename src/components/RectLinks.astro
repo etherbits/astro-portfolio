@@ -1,0 +1,53 @@
+---
+import { cn } from "../utils/tailwind";
+
+interface Props {
+  class: string;
+  size: number
+}
+
+const { props } = Astro;
+
+const linkObjs = [
+  { vectorName: "Newspaper", imgType: "vector", url: "#" },
+  {
+    imageSrc: "/images/github.webp",
+    imgType: "image",
+    url: "https://github.com/etherbits",
+  },
+  {
+    imageSrc: "/images/twitter.webp",
+    imgType: "image",
+    url: "https://twitter.com/etherbito",
+  },
+  {
+    imageSrc: "/images/linkedin.webp",
+    imgType: "image",
+    url: "https://www.linkedin.com/in/nika-qvrivishvili-126664203",
+  },
+];
+---
+
+<ul class={cn("flex w-fit gap-11", props.class)}>
+  {
+    linkObjs.map((link) => (
+      <li>
+        <a
+          href={link.url}
+          class={cn(
+            "flex items-center justify-center overflow-hidden rounded-lg border border-slate-600 bg-neutral-950 hover:border-slate-300",
+          )}
+          style={{ width: `${props.size}px`, height: `${props.size}px` }}
+          target="_blank"
+          aria-label="Resume/CV"
+        >
+          {link.imgType === "vector" ? (
+            <div />
+          ) : (
+            <img src={link.imageSrc} alt="resume" />
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ul>

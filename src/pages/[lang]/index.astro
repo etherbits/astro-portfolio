@@ -2,6 +2,7 @@
 import Button from "../../components/Button.astro";
 import Layout from "../../layouts/Layout.astro";
 import OutlineText from "../../components/OutlineText.astro";
+import RectLinks from '../../components/RectLinks.astro'
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import { languages } from "../../i18n/ui";
 
@@ -47,6 +48,7 @@ const t = generateTranslator(lang);
       <a href="/projects" class="mb-11">
         <Button>{t("home.nav_button")}</Button>
       </a>
+      <RectLinks size={48}/>
     </div>
   </main>
 </Layout>

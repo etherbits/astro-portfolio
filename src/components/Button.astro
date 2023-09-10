@@ -1,5 +1,5 @@
 ---
-import { cn, prefixClass } from "../utils/tailwind";
+import { cn } from "../utils/tailwind";
 interface Props {
   class?: string;
 }
@@ -42,10 +42,10 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
   }
 
   function removeAnimStyles(btnContainer: HTMLDivElement) {
-        const btn = btnContainer.querySelector(
-          "[outline-button]",
-        ) as HTMLButtonElement;
-        btn.style.transform = "";
+    const btn = btnContainer.querySelector(
+      "[outline-button]",
+    ) as HTMLButtonElement;
+    btn.style.transform = "";
   }
 
   const addTouchAnimation = () =>
@@ -57,13 +57,13 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
         setAnimStyles(btnContainer);
       });
       document.addEventListener("mouseup", () => {
-        removeAnimStyles(btnContainer)
+        removeAnimStyles(btnContainer);
       });
       document.addEventListener("touchend", () => {
-        removeAnimStyles(btnContainer)
+        removeAnimStyles(btnContainer);
       });
       document.addEventListener("dragend", () => {
-        removeAnimStyles(btnContainer)
+        removeAnimStyles(btnContainer);
       });
     });
 

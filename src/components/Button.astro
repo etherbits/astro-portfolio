@@ -22,7 +22,7 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
     <slot />
   </button>
   <div
-    class="absolute border-slate-600 top-0 translate-y-[16%]
+    class="absolute border-neutral-600 top-0 translate-y-[18%]
   left-0 w-full h-full border rounded-[4px] z-[-1]"
   >
   </div>
@@ -40,14 +40,14 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
           "[outline-button]",
         ) as HTMLButtonElement;
 
-        btn.style.transform = "translateY(16%) scale(1)";
+        btn.style.transform = "translateY(18%) scale(1)";
       });
       btnContainer.addEventListener("touchstart", () => {
         const btn = btnContainer.querySelector(
           "[outline-button]",
         ) as HTMLButtonElement;
 
-        btn.style.transform = "translateY(16%) scale(1)";
+        btn.style.transform = "translateY(18%) scale(1)";
       });
       document.addEventListener("mouseup", () => {
         const btn = btnContainer.querySelector(
@@ -56,6 +56,12 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
         btn.style.transform = "";
       });
       document.addEventListener("touchend", () => {
+        const btn = btnContainer.querySelector(
+          "[outline-button]",
+        ) as HTMLButtonElement;
+        btn.style.transform = "";
+      });
+      document.addEventListener("dragend", () => {
         const btn = btnContainer.querySelector(
           "[outline-button]",
         ) as HTMLButtonElement;

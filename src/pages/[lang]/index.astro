@@ -1,0 +1,52 @@
+---
+import Button from "../../components/Button.astro";
+import Layout from "../../layouts/Layout.astro";
+import OutlineText from "../../components/OutlineText.astro";
+import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
+import { languages } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    const obj = {
+      params: {
+        lang: lang,
+      },
+    };
+    return obj;
+  });
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = generateTranslator(lang);
+---
+
+<Layout title="Welcome to Astro.">
+  <main class="bg-black relative z-0">
+    <div
+      class="flex max-w-full flex-col items-center justify-center text-center sm:mt-[3vh] md:mt-[7vh]"
+    >
+      <img
+        src="https://github.com/etherbits.png?size=200"
+        width={200}
+        height={200}
+        alt="profile"
+        class="mb-8 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
+      />
+      <p class="mb-4 text-[26px] text-slate-200 sm:text-clamp-3xl">
+        {t("home.greet_start")}
+        <span class="text-blue-200">{t("home.greet_name")}</span>
+        {t("home.greet_end")}
+      </p>
+      <OutlineText dropCount={1}>{t("home.profession")}</OutlineText>
+      <p
+        class="mb-16 mt-8 max-w-[320px] text-sm leading-9 text-slate-300
+        sm:max-w-clamp-xs sm:text-clamp-xl sm:leading-clamp-xl"
+      >
+        {t("home.skill_paragraph")}
+      </p>
+      <a href="/projects" class="mb-11">
+        <Button>{t("home.nav_button")}</Button>
+      </a>
+    </div>
+  </main>
+</Layout>

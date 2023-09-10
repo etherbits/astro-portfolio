@@ -1,4 +1,22 @@
+---
+import { languages } from "../../i18n/ui";
+
+const splitPathname = Astro.url.pathname.split("/");
+const currentLocale = splitPathname[1] as keyof typeof languages;
+
+const currentLanguage = languages[currentLocale]
+
+const generateUrl = () => {
+  splitPathname[1] = currentLocale === "en" ? "ka" : "en";
+
+  return splitPathname.join("/");
+};
+
+const url = generateUrl();
+---
+
 <a
+  href={url}
   class="flex items-center gap-4 rounded-md px-4 py-2 cursor-pointer hover:bg-neutral-800 transition-[all] [transition-duration:250ms]"
   title="Toggle Language Eng/Geo"
 >
@@ -9,6 +27,6 @@
     class="h-4 w-4"
     alt="language flag"
   />
-   en
-  <!-- {type === "compact" ? currentLocale : currentLanguage.label} -->
+  <span class="hidden xl:block">{currentLanguage}</span>
+  <span class="hidden md:block xl:hidden">{currentLocale}</span>
 </a>

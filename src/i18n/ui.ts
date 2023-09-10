@@ -1,7 +1,7 @@
 export const languages = {
   en: "English",
   ka: "Georgian",
-};
+} as const;
 
 export const defaultLang = "en";
 

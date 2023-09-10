@@ -33,39 +33,37 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
     "[button-container]",
   ) as NodeListOf<HTMLDivElement>;
 
+  function setAnimStyles(btnContainer: HTMLDivElement) {
+    const btn = btnContainer.querySelector(
+      "[outline-button]",
+    ) as HTMLButtonElement;
+
+    btn.style.transform = "translateY(18%) scale(1)";
+  }
+
+  function removeAnimStyles(btnContainer: HTMLDivElement) {
+        const btn = btnContainer.querySelector(
+          "[outline-button]",
+        ) as HTMLButtonElement;
+        btn.style.transform = "";
+  }
+
   const addTouchAnimation = () =>
     btnContainers.forEach((btnContainer) => {
-      btnContainer.addEventListener("mousedown", () => {
-        const btn = btnContainer.querySelector(
-          "[outline-button]",
-        ) as HTMLButtonElement;
-
-        btn.style.transform = "translateY(18%) scale(1)";
-      });
+      btnContainer.addEventListener("mousedown", () =>
+        setAnimStyles(btnContainer),
+      );
       btnContainer.addEventListener("touchstart", () => {
-        const btn = btnContainer.querySelector(
-          "[outline-button]",
-        ) as HTMLButtonElement;
-
-        btn.style.transform = "translateY(18%) scale(1)";
+        setAnimStyles(btnContainer);
       });
       document.addEventListener("mouseup", () => {
-        const btn = btnContainer.querySelector(
-          "[outline-button]",
-        ) as HTMLButtonElement;
-        btn.style.transform = "";
+        removeAnimStyles(btnContainer)
       });
       document.addEventListener("touchend", () => {
-        const btn = btnContainer.querySelector(
-          "[outline-button]",
-        ) as HTMLButtonElement;
-        btn.style.transform = "";
+        removeAnimStyles(btnContainer)
       });
       document.addEventListener("dragend", () => {
-        const btn = btnContainer.querySelector(
-          "[outline-button]",
-        ) as HTMLButtonElement;
-        btn.style.transform = "";
+        removeAnimStyles(btnContainer)
       });
     });
 

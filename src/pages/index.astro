@@ -1,4 +1,5 @@
 ---
+import Button from "../components/Button.astro";
 import Layout from "../layouts/Layout.astro";
 import OutlineText from "../components/OutlineText.astro";
 import { getLangFromUrl, generateTranslator } from "../i18n/utils";
@@ -8,17 +9,17 @@ const t = generateTranslator(lang);
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="bg-black">
+  <main class="bg-black relative z-0">
     <div
       class="flex max-w-full flex-col items-center justify-center text-center sm:mt-[3vh] md:mt-[7vh]"
     >
-        <img
-          src="https://github.com/etherbits.png?size=200"
-          width={200}
-          height={200}
-          alt="profile"
-          class="mb-8 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
-        />
+      <img
+        src="https://github.com/etherbits.png?size=200"
+        width={200}
+        height={200}
+        alt="profile"
+        class="mb-8 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
+      />
       <p class="mb-4 text-[26px] text-slate-200 sm:text-clamp-3xl">
         {t("home.greet_start")}
         <span class="text-blue-200">{t("home.greet_name")}</span>
@@ -32,8 +33,9 @@ const t = generateTranslator(lang);
         {t("home.skill_paragraph")}
       </p>
       <a href="/projects" class="mb-11">
-        <!-- <Button class="sm:clamp-xl text-base">{t("intro_button")}</Button> -->
+        <Button>{t("home.nav_button")}</Button>
       </a>
+        <Button>{t("home.nav_button")}</Button>
     </div>
   </main>
 </Layout>

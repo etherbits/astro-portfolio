@@ -1,0 +1,54 @@
+---
+import { cn, prefixClass } from "../utils/tailwind";
+interface Props {
+  class?: string;
+}
+
+const { props } = Astro;
+const baseClass = `text-base block w-fit whitespace-nowrap rounded-[4px]
+border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clamp-xl`;
+---
+
+<div button-container class={"flex relative group h-auto cursor-pointer"}>
+  <button
+    outline-button
+    type="button"
+    class={cn(
+      baseClass,
+      "transition-all translate-y-0 group-hover:translate-y-[-4%] scale-[1.04] group-hover:scale-[1.06]",
+      props.class,
+    )}
+  >
+    <slot />
+  </button>
+  <div
+    class="absolute border-slate-600 top-0 translate-y-[16%]
+  left-0 w-full h-full border rounded-[4px] z-[-1]"
+  >
+  </div>
+</div>
+
+<script>
+  const btnContainers = document.querySelectorAll(
+    "[button-container]",
+  ) as NodeListOf<HTMLDivElement>;
+
+  const addTouchAnimation = () =>
+    btnContainers.forEach((btnContainer) => {
+      btnContainer.addEventListener("mousedown", () => {
+        const btn = btnContainer.querySelector(
+          "[outline-button]",
+        ) as HTMLButtonElement;
+
+        btn.style.transform = "translateY(16%) scale(1)";
+      });
+      document.addEventListener("mouseup", () => {
+        const btn = btnContainer.querySelector(
+          "[outline-button]",
+        ) as HTMLButtonElement;
+        btn.style.transform = "";
+      });
+    });
+
+  addTouchAnimation();
+</script>

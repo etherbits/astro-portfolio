@@ -18,7 +18,11 @@ const baseClassName: string =
       [...Array(props.dropCount)].map((_, i) => {
         return (
           <p
-            class={cn(baseClassName, "absolute left-0 top-0 z-[-1]", props.class)}
+            class={cn(
+              baseClassName,
+              "absolute left-0 top-0 z-[-1]",
+              props.class,
+            )}
             style={{
               transform: `translateY(${12 * (i + 1)}%)`,
               opacity: 1 - (i + 1) * 0.4,

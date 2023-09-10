@@ -5,6 +5,8 @@ export const languages = {
 
 export const defaultLang = "en";
 
+export type TranslationKey = keyof typeof ui[typeof defaultLang]
+
 export const ui = {
   en: {
     "navigation.home": "Home",

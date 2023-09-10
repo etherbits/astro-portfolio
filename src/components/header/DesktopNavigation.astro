@@ -1,5 +1,7 @@
 ---
 import { cn } from "../../utils/tailwind";
+import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
+import type { TranslationKey } from "../../i18n/ui";
 export const navigationLinks = [
   { name: "home", icon: "Home", href: "/" },
   { name: "projects", icon: "Folder", href: "/projects" },
@@ -8,6 +10,9 @@ export const navigationLinks = [
 ];
 
 const path = Astro.url.pathname;
+
+const lang = getLangFromUrl(Astro.url);
+const t = generateTranslator(lang);
 ---
 
 <nav class="hidden md:block">
@@ -15,16 +20,19 @@ const path = Astro.url.pathname;
     class="flex items-center gap-4 whitespace-nowrap text-slate-400 md:text-clamp-lg lg:gap-8"
   >
     {
-      navigationLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class={cn({ "text-slate-300": path === link.href })}
-          >
-            {link.name}
-          </a>
-        </li>
-      ))
+      navigationLinks.map((link) => {
+        const navTranslationKey = ("navigation." + link.name) as TranslationKey;
+        return (
+          <li>
+            <a
+              href={link.href}
+              class={cn({ "text-slate-300": path === link.href })}
+            >
+              {t(navTranslationKey)}
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 </nav>

@@ -1,0 +1,11 @@
+---
+import DesktopNavigation from "./DesktopNavigation.astro";
+import MobileNavigation from "./MobileNavigation.astro";
+---
+
+<div class="hidden md:block">
+  <DesktopNavigation />
+</div>
+<div class="ml-auto md:hidden">
+  <MobileNavigation />
+</div>

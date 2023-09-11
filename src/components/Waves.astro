@@ -720,8 +720,6 @@ const { props } = Astro;
 
   type WaveKey = keyof typeof waveLines;
 
-  let didResize = false;
-
   function getDashLength(ctx: CanvasRenderingContext2D) {
     const { width, height } = ctx.canvas;
     return Math.sqrt(width * width + height * height);
@@ -755,7 +753,7 @@ const { props } = Astro;
   }
 
   function setFgCtxOptions(ctx: CanvasRenderingContext2D) {
-    ctx.setLineDash([getDashLength(ctx) / 12, getDashLength(ctx)]);
+    ctx.setLineDash([200, getDashLength(ctx)]);
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = "#60a5fa";
     ctx.lineDashOffset = getDashLength(ctx);
@@ -821,10 +819,6 @@ const { props } = Astro;
       i = 0;
     }
 
-    if (didResize) {
-      didResize = false;
-      return;
-    }
     requestAnimationFrame(() => animateFgLines(ctx, paths, i));
   }
 

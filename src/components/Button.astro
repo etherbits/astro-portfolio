@@ -55,13 +55,13 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
       );
       btnContainer.addEventListener("touchstart", () => {
         setAnimStyles(btnContainer);
-      });
+      }, {passive: true});
       document.addEventListener("mouseup", () => {
         removeAnimStyles(btnContainer);
       });
       document.addEventListener("touchend", () => {
         removeAnimStyles(btnContainer);
-      });
+      }, {passive: true});
       document.addEventListener("dragend", () => {
         removeAnimStyles(btnContainer);
       });

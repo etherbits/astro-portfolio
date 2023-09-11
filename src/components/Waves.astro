@@ -715,7 +715,7 @@ const { props } = Astro;
     },
   };
 
-  type WaveKey = keyof typeof waveLines
+  type WaveKey = keyof typeof waveLines;
 
   const animStep = 10;
   let didResize = false;
@@ -760,7 +760,11 @@ const { props } = Astro;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
-  function generateLines(ctx: CanvasRenderingContext2D, paths: Path2D[], waveType: WaveKey) {
+  function generateLines(
+    ctx: CanvasRenderingContext2D,
+    paths: Path2D[],
+    waveType: WaveKey,
+  ) {
     paths.splice(0, paths.length);
     waveLines[waveType].lines.forEach((line) => {
       const path = new Path2D();
@@ -847,7 +851,7 @@ const { props } = Astro;
     fgCtx: CanvasRenderingContext2D,
     bgPaths: Path2D[],
     fgPaths: Path2D[],
-    waveType: WaveKey
+    waveType: WaveKey,
   ) {
     generateLines(bgCtx, bgPaths, waveType);
     generateLines(fgCtx, fgPaths, waveType);
@@ -872,9 +876,7 @@ const { props } = Astro;
     const bgCanvas = document.querySelector("[canvas-bg]") as HTMLCanvasElement;
 
     const fgCanvas = document.querySelector("[canvas-fg]") as HTMLCanvasElement;
-    const waveType = fgCanvas.getAttribute(
-      "wave-type",
-    ) as WaveKey
+    const waveType = fgCanvas.getAttribute("wave-type") as WaveKey;
 
     const { width, height } = bgCanvas.getBoundingClientRect();
 
@@ -909,7 +911,7 @@ const { props } = Astro;
       fgCtx.canvas.width = width;
       fgCtx.canvas.height = height;
 
-      generateAllLines(bgCtx, fgCtx, bgPaths, fgPaths);
+      generateAllLines(bgCtx, fgCtx, bgPaths, fgPaths, waveType);
 
       renderBgLines(bgCtx, bgPaths);
       renderFgLines(fgCtx, fgPaths);

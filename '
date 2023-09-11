@@ -719,7 +719,6 @@ const { props } = Astro;
   };
 
   type WaveKey = keyof typeof waveLines;
-  const segmentDiv = 4;
 
   function getDashLength(ctx: CanvasRenderingContext2D) {
     const { width, height } = ctx.canvas;
@@ -754,14 +753,10 @@ const { props } = Astro;
   }
 
   function setFgCtxOptions(ctx: CanvasRenderingContext2D) {
-    const dashLength = getDashLength(ctx);
-    ctx.setLineDash([
-      dashLength / segmentDiv,
-      dashLength - dashLength / segmentDiv,
-    ]);
-    ctx.lineWidth = 2;
+    ctx.setLineDash([0, getDashLength(ctx)]);
+    ctx.lineWidth = 1.5;
     ctx.strokeStyle = "#60a5fa";
-    ctx.lineDashOffset = dashLength + dashLength / segmentDiv;
+    ctx.lineDashOffset = 0;
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
@@ -798,13 +793,12 @@ const { props } = Astro;
   function drawLines(
     ctx: CanvasRenderingContext2D,
     paths: Path2D[],
-    rgba: [number, number, number, number],
+    rgb: [number, number, number],
   ) {
     const { width, height } = ctx.canvas;
     ctx.clearRect(0, 0, width, height);
-    paths.forEach((path) => {
-      rgba[3] += 0.08;
-      ctx.strokeStyle = `rgb(${rgba})`;
+    paths.forEach((path, i) => {
+      ctx.strokeStyle = `rgb(${rgb},${Math.min(1, i / 16)})`;
       ctx.stroke(path);
     });
   }
@@ -814,19 +808,18 @@ const { props } = Astro;
     paths: Path2D[],
     i = 0,
   ) {
-    i += getDashLength(ctx) / 300;
+    i += getDashLength(ctx) / 180;
     const dashLength = getDashLength(ctx);
 
     ctx.lineDashOffset = dashLength - i;
-    const segmentLength =
-      (dashLength / segmentDiv) * (Math.min(i * 2, dashLength) / dashLength);
-    ctx.setLineDash([segmentLength, dashLength + segmentLength]);
+    ctx.setLineDash([
+      (dashLength / 5) * (i / dashLength),
+      dashLength - (dashLength / 10) * (i / dashLength),
+    ]);
 
-    requestAnimationFrame(() =>
-      drawLines(ctx, paths, [96, 165, 250, 0]),
-    );
+    requestAnimationFrame(() => drawLines(ctx, paths, [96, 165, 250]));
 
-    if (i >= dashLength - segmentLength) {
+    if (i >= dashLength) {
       i = 0;
     }
 
@@ -840,12 +833,12 @@ const { props } = Astro;
     fgDelay: number,
     i = 0,
   ) {
-    i += getDashLength(ctx) / 150;
+    i += getDashLength(ctx) / 180;
     const dashLength = getDashLength(ctx);
 
     ctx.lineDashOffset = dashLength - i;
 
-    requestAnimationFrame(() => drawLines(ctx, paths, [51, 65, 85, 0]));
+    requestAnimationFrame(() => drawLines(ctx, paths, [51, 65, 85]));
 
     if (i >= dashLength) {
       setTimeout(() => startFgAnimation(), fgDelay);
@@ -870,12 +863,12 @@ const { props } = Astro;
 
   function renderBgLines(ctx: CanvasRenderingContext2D, paths: Path2D[]) {
     requestAnimationFrame(() => setBgCtxOption(ctx));
-    requestAnimationFrame(() => drawLines(ctx, paths, [51, 65, 85, 0]));
+    requestAnimationFrame(() => drawLines(ctx, paths, [51, 65, 85]));
   }
 
   function renderFgLines(ctx: CanvasRenderingContext2D, paths: Path2D[]) {
     requestAnimationFrame(() => setFgCtxOptions(ctx));
-    requestAnimationFrame(() => drawLines(ctx, paths, [96, 165, 250, 0]));
+    requestAnimationFrame(() => drawLines(ctx, paths, [96, 165, 250]));
   }
 
   function attachWaveAnimation(
@@ -905,6 +898,7 @@ const { props } = Astro;
     generateAllLines(bgCtx, fgCtx, bgPaths, fgPaths, waveType);
 
     renderBgLines(bgCtx, bgPaths);
+    // renderFgLines(fgCtx, fgPaths);
     requestAnimationFrame(() =>
       animateBgLines(bgCtx, bgPaths, startFgAnimation, fgDelay),
     );

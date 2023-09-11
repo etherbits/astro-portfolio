@@ -31,11 +31,16 @@ module.exports = {
       },
       animation: {
         appear: "appear 1s linear",
+        line: "line 1s infinite",
       },
       keyframes: {
         appear: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        line: {
+          "0%": { strokeDashoffset: "1520" },
+          "100%": { strokeDashoffset: "0" },
         },
       },
     },

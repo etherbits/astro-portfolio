@@ -377,28 +377,20 @@ const { props } = Astro;
     },
   };
 
-  const canvas = document.querySelector(
-    "[home-waves-right]",
-  ) as HTMLCanvasElement;
-
-  const { width, height } = canvas.getBoundingClientRect();
-
   const animStep = 10;
-  const dashLength = Math.sqrt(width * width + height * height);
-  console.log(dashLength)
+  const paths: Path2D[] = [];
 
-  function initCanvas() {
-    canvas.width = +width;
-    canvas.height = +height;
+  function getDashLength(width: number, height: number) {
+    return Math.sqrt(width * width + height * height);
+  }
 
+  function setupCanvas(canvas: HTMLCanvasElement) {
     const ctx = canvas.getContext("2d");
 
     return ctx;
   }
 
-  const paths: Path2D[] = [];
-
-  function scaleSegment(coords: number[]) {
+  function scaleSegment(width: number, height: number, coords: number[]) {
     return coords.map((num, i) => {
       let out = num;
       if (i % 2 === 0) {
@@ -410,111 +402,106 @@ const { props } = Astro;
     });
   }
 
-  function initLines(ctx: CanvasRenderingContext2D) {
-    ctx.setLineDash([dashLength]);
+  function setCtxOptions(
+    width: number,
+    height: number,
+    ctx: CanvasRenderingContext2D,
+  ) {
+    ctx.setLineDash([getDashLength(width, height)]);
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = "#64748b";
+    ctx.lineDashOffset = 0;
+  }
+
+  function generateLines(width: number, height: number) {
+    paths.splice(0, paths.length)
     waveLines.homeRight.lines.forEach((line) => {
       const path = new Path2D();
 
-      const firstSegment = line.shift();
-      if (!firstSegment) return;
-      const moveSegment = scaleSegment(firstSegment) as [number, number];
-
-      path.moveTo(...moveSegment);
       line.forEach((lineSegment) => {
-        const segment = scaleSegment(lineSegment) as [
-          number,
-          number,
-          number,
-          number,
-          number,
-          number,
-        ];
-
-        path.bezierCurveTo(...segment);
+        if (lineSegment.length === 2) {
+          path.moveTo(
+            ...(scaleSegment(width, height, lineSegment) as [number, number]),
+          );
+        } else if (lineSegment.length === 6) {
+          path.bezierCurveTo(
+            ...(scaleSegment(width, height, lineSegment) as [
+              number,
+              number,
+              number,
+              number,
+              number,
+              number,
+            ]),
+          );
+        }
       });
-
-      console.log(path);
-      ctx.stroke(path);
 
       paths.push(path);
     });
   }
 
-  function drawLines(ctx: CanvasRenderingContext2D, i = 0) {
-    i += animStep;
-
-    ctx.lineDashOffset = dashLength - i;
+  function drawLines(
+    width: number,
+    height: number,
+    ctx: CanvasRenderingContext2D,
+  ) {
     ctx.clearRect(0, 0, width, height);
     paths.forEach((path) => ctx.stroke(path));
+  }
+
+  function animateLines(
+    width: number,
+    height: number,
+    ctx: CanvasRenderingContext2D,
+    i = 0,
+  ) {
+    const dashLength = getDashLength(width, height);
+    i += animStep;
+
+    console.log(dashLength);
+
+    ctx.lineDashOffset = dashLength - i;
+
+    requestAnimationFrame(() => drawLines(width, height, ctx));
 
     if (i >= dashLength) return;
 
-    requestAnimationFrame(() => drawLines(ctx, i));
+    requestAnimationFrame(() => animateLines(width, height, ctx, i));
   }
 
   function attachWaveAnimation() {
-    const ctx = initCanvas();
+    const canvas = document.querySelector(
+      "[home-waves-right]",
+    ) as HTMLCanvasElement;
+
+    const { width, height } = canvas.getBoundingClientRect();
+
+    const ctx = setupCanvas(canvas);
 
     if (!ctx) {
       console.log("ctx init err");
       return;
     }
 
-    requestAnimationFrame(() => initLines(ctx));
-    requestAnimationFrame(() => drawLines(ctx));
+    ctx.canvas.width = width;
+    ctx.canvas.height = height;
+
+    requestAnimationFrame(() => setCtxOptions(width, height, ctx));
+    requestAnimationFrame(() => generateLines(width, height));
+    requestAnimationFrame(() => drawLines(width, height, ctx));
+    requestAnimationFrame(() => animateLines(width, height, ctx));
+
+    window.addEventListener("resize", () => {
+      const { width, height } = canvas.getBoundingClientRect();
+      ctx.canvas.width = width;
+      ctx.canvas.height = height;
+
+      requestAnimationFrame(() => setCtxOptions(width, height, ctx));
+      requestAnimationFrame(() => generateLines(width, height));
+      requestAnimationFrame(() => drawLines(width, height, ctx));
+    });
   }
 
   attachWaveAnimation();
 </script>
-
-<!-- <svg -->
-<!--   width="1460" -->
-<!--   height="1068" -->
-<!--   viewBox="0 0 1460 1068" -->
-<!--   fill="none" -->
-<!--   xmlns="http://www.w3.org/2000/svg" -->
-<!--   preserveAspectRatio="none" -->
-<!--   {...props} -->
-<!-- > -->
-<!--       <mask id="color-mask" fill="white"> -->
-<!--         <g> -->
-<!--           <rect width="1460" height="250" x="0" y="0" fill="white"/>  -->
-<!--           <animateTransform -->
-<!--             attributeName="transform" -->
-<!--             attributeType="XML" -->
-<!--             type="translate" -->
-<!--             values="0,800; 0,-300; 0,800" -->
-<!--             keyTimes="0; 0.5; 1" -->
-<!--             dur="12s" -->
-<!--             repeatCount="indefinite"></animateTransform> -->
-<!--         </g> -->
-<!--       </mask> -->
-<!--   <g id="color" mask="url(#color-mask)"> -->
-<!--   <path -->
-<!--     opacity="0.1" -->
-<!--     d="M954.298 1C872.798 124.5 633.798 142.5 623.298 293C608.33 507.533 515.798 441 406.798 550C287.298 669.5 441.798 731.5 123.798 747C76.9643 750 -12.8023 765.9 2.79766 805.5" -->
-<!--     stroke="#BFDBFE" -->
-<!--     stroke-opacity="0.6" -->
-<!--     stroke-width="2"></path> -->
-<!--   <path -->
-<!--     opacity="0.2" -->
-<!--     d="M978.271 9.69049C901.033 134 653.319 147.667 644.557 301.881C631.46 516.373 529.59 443.262 427.676 556.286C315.488 677.978 450.329 730.786 142.081 758.619C96.6302 766.381 4.5047 778.376 20.1047 817.976" -->
-<!--     stroke="#BFDBFE" -->
-<!--     stroke-opacity="0.6" -->
-<!--     stroke-width="2"></path> -->
-<!--   <path -->
-<!--     opacity="0.3" -->
-<!--     d="M1002.25 18.381C929.271 143.5 672.842 152.833 665.818 310.762C654.592 525.213 543.385 445.524 448.556 562.571C343.68 686.456 458.861 730.071 160.366 770.238C116.298 782.762 21.8134 790.852 37.4134 830.452" -->
-<!--     stroke="#BFDBFE" -->
-<!--     stroke-opacity="0.6" -->
-<!--     stroke-width="2"></path> -->
-<!--   <path -->
-<!--     opacity="0.4" -->
-<!--     d="M1026.22 27.0714C957.509 153 692.367 158 687.081 319.643C677.725 534.053 557.181 447.786 469.438 568.857C371.873 694.933 467.396 729.357 178.652 781.857C135.967 799.143 39.1237 803.329 54.7237 842.929" -->
-<!--     stroke="#BFDBFE" -->
-<!--     stroke-opacity="0.6" -->
-<!--     stroke-width="2"></path> -->
-<!--     </g> -->
-<!-- </svg> -->

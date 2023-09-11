@@ -5,7 +5,8 @@ interface Props extends HTMLAttributes<"svg"> {}
 const { props } = Astro;
 ---
 
-<canvas home-waves-right {...props}> </canvas>
+<canvas home-waves-right-bg {...props}> </canvas>
+<canvas home-waves-right-fg {...props}> </canvas>
 
 <script>
   const waveLines = {
@@ -378,7 +379,7 @@ const { props } = Astro;
   };
 
   const animStep = 10;
-  const paths: Path2D[] = [];
+  let didResize = false;
 
   function getDashLength(ctx: CanvasRenderingContext2D) {
     const { width, height } = ctx.canvas;
@@ -404,14 +405,23 @@ const { props } = Astro;
     });
   }
 
-  function setCtxOptions(ctx: CanvasRenderingContext2D) {
+  function setBgCtxOption(ctx: CanvasRenderingContext2D) {
     ctx.setLineDash([getDashLength(ctx)]);
     ctx.lineWidth = 1.5;
-    ctx.strokeStyle = "#64748b";
+    ctx.strokeStyle = "#334155";
     ctx.lineDashOffset = 0;
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   }
 
-  function generateLines(ctx: CanvasRenderingContext2D) {
+  function setFgCtxOptions(ctx: CanvasRenderingContext2D) {
+    ctx.setLineDash([getDashLength(ctx) / 12, getDashLength(ctx)]);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "#60a5fa";
+    ctx.lineDashOffset = getDashLength(ctx);
+    ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  }
+
+  function generateLines(ctx: CanvasRenderingContext2D, paths: Path2D[]) {
     paths.splice(0, paths.length);
     waveLines.homeRight.lines.forEach((line) => {
       const path = new Path2D();
@@ -437,57 +447,133 @@ const { props } = Astro;
     });
   }
 
-  function drawLines(ctx: CanvasRenderingContext2D) {
+  function drawLines(
+    ctx: CanvasRenderingContext2D,
+    paths: Path2D[],
+    rgb: [number, number, number],
+  ) {
     const { width, height } = ctx.canvas;
     ctx.clearRect(0, 0, width, height);
-    paths.forEach((path) => ctx.stroke(path));
+    paths.forEach((path, i) => {
+      ctx.strokeStyle = `rgb(${rgb},${Math.min(1, i / 16)})`;
+      ctx.stroke(path);
+    });
   }
 
-  function animateLines(ctx: CanvasRenderingContext2D, i = 0) {
-    const dashLength = getDashLength(ctx);
+  function animateFgLines(
+    ctx: CanvasRenderingContext2D,
+    paths: Path2D[],
+    i = 0,
+  ) {
     i += animStep;
-
-    console.log(dashLength);
+    const dashLength = getDashLength(ctx);
 
     ctx.lineDashOffset = dashLength - i;
 
-    requestAnimationFrame(() => drawLines(ctx));
+    requestAnimationFrame(() => drawLines(ctx, paths, [96, 165, 250]));
 
-    if (i >= dashLength) return;
+    if (i >= dashLength) {
+      i = 0;
+    }
 
-    requestAnimationFrame(() => animateLines(ctx, i));
+    if (didResize) {
+      didResize = false;
+      return;
+    }
+    requestAnimationFrame(() => animateFgLines(ctx, paths, i));
   }
 
+  function animateBgLines(
+    ctx: CanvasRenderingContext2D,
+    paths: Path2D[],
+    i = 0,
+  ) {
+    i += animStep;
+    const dashLength = getDashLength(ctx);
+
+    ctx.lineDashOffset = dashLength - i;
+
+    requestAnimationFrame(() => drawLines(ctx, paths, [51, 65, 85]));
+
+    if (i >= dashLength) {
+      startFgAction();
+      return;
+    }
+
+    requestAnimationFrame(() => animateBgLines(ctx, paths, i));
+  }
+
+  function generateAllLines(
+    bgCtx: CanvasRenderingContext2D,
+    fgCtx: CanvasRenderingContext2D,
+    bgPaths: Path2D[],
+    fgPaths: Path2D[],
+  ) {
+    generateLines(bgCtx, bgPaths);
+    generateLines(fgCtx, fgPaths);
+  }
+
+  function renderBgLines(ctx: CanvasRenderingContext2D, paths: Path2D[]) {
+    requestAnimationFrame(() => setBgCtxOption(ctx));
+    requestAnimationFrame(() => drawLines(ctx, paths, [51, 65, 85]));
+  }
+
+  function renderFgLines(ctx: CanvasRenderingContext2D, paths: Path2D[]) {
+    requestAnimationFrame(() => setFgCtxOptions(ctx));
+    requestAnimationFrame(() => drawLines(ctx, paths, [96, 165, 250]));
+  }
+
+  let startFgAction = () => {};
+
   function attachWaveAnimation() {
-    const canvas = document.querySelector(
-      "[home-waves-right]",
+    const bgPaths: Path2D[] = [];
+    const fgPaths: Path2D[] = [];
+
+    const bgCanvas = document.querySelector(
+      "[home-waves-right-bg]",
     ) as HTMLCanvasElement;
 
-    const { width, height } = canvas.getBoundingClientRect();
+    const fgCanvas = document.querySelector(
+      "[home-waves-right-fg]",
+    ) as HTMLCanvasElement;
 
-    const ctx = setupCanvas(canvas);
+    const { width, height } = bgCanvas.getBoundingClientRect();
 
-    if (!ctx) {
+    const bgCtx = setupCanvas(bgCanvas);
+    const fgCtx = setupCanvas(fgCanvas);
+
+    if (!bgCtx || !fgCtx) {
       console.log("ctx init err");
       return;
     }
 
-    ctx.canvas.width = width;
-    ctx.canvas.height = height;
+    bgCtx.canvas.width = width;
+    bgCtx.canvas.height = height;
+    fgCtx.canvas.width = width;
+    fgCtx.canvas.height = height;
 
-    requestAnimationFrame(() => setCtxOptions(ctx));
-    requestAnimationFrame(() => generateLines(ctx));
-    requestAnimationFrame(() => drawLines(ctx));
-    requestAnimationFrame(() => animateLines(ctx));
+    generateAllLines(bgCtx, fgCtx, bgPaths, fgPaths);
+
+    renderBgLines(bgCtx, bgPaths);
+    requestAnimationFrame(() => animateBgLines(bgCtx, bgPaths));
+
+    startFgAction = () => {
+      renderFgLines(fgCtx, fgPaths);
+      requestAnimationFrame(() => animateFgLines(fgCtx, fgPaths));
+    };
 
     window.addEventListener("resize", () => {
-      const { width, height } = canvas.getBoundingClientRect();
-      ctx.canvas.width = width;
-      ctx.canvas.height = height;
+      const { width, height } = bgCanvas.getBoundingClientRect();
 
-      requestAnimationFrame(() => setCtxOptions(ctx));
-      requestAnimationFrame(() => generateLines(ctx));
-      requestAnimationFrame(() => drawLines(ctx));
+      bgCtx.canvas.width = width;
+      bgCtx.canvas.height = height;
+      fgCtx.canvas.width = width;
+      fgCtx.canvas.height = height;
+
+      generateAllLines(bgCtx, fgCtx, bgPaths, fgPaths);
+
+      renderBgLines(bgCtx, bgPaths);
+      renderFgLines(fgCtx, fgPaths);
     });
   }
 

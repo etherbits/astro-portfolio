@@ -380,7 +380,8 @@ const { props } = Astro;
   const animStep = 10;
   const paths: Path2D[] = [];
 
-  function getDashLength(width: number, height: number) {
+  function getDashLength(ctx: CanvasRenderingContext2D) {
+    const { width, height } = ctx.canvas;
     return Math.sqrt(width * width + height * height);
   }
 
@@ -390,7 +391,8 @@ const { props } = Astro;
     return ctx;
   }
 
-  function scaleSegment(width: number, height: number, coords: number[]) {
+  function scaleSegment(ctx: CanvasRenderingContext2D, coords: number[]) {
+    const { width, height } = ctx.canvas;
     return coords.map((num, i) => {
       let out = num;
       if (i % 2 === 0) {
@@ -402,30 +404,24 @@ const { props } = Astro;
     });
   }
 
-  function setCtxOptions(
-    width: number,
-    height: number,
-    ctx: CanvasRenderingContext2D,
-  ) {
-    ctx.setLineDash([getDashLength(width, height)]);
+  function setCtxOptions(ctx: CanvasRenderingContext2D) {
+    ctx.setLineDash([getDashLength(ctx)]);
     ctx.lineWidth = 1.5;
     ctx.strokeStyle = "#64748b";
     ctx.lineDashOffset = 0;
   }
 
-  function generateLines(width: number, height: number) {
-    paths.splice(0, paths.length)
+  function generateLines(ctx: CanvasRenderingContext2D) {
+    paths.splice(0, paths.length);
     waveLines.homeRight.lines.forEach((line) => {
       const path = new Path2D();
 
       line.forEach((lineSegment) => {
         if (lineSegment.length === 2) {
-          path.moveTo(
-            ...(scaleSegment(width, height, lineSegment) as [number, number]),
-          );
+          path.moveTo(...(scaleSegment(ctx, lineSegment) as [number, number]));
         } else if (lineSegment.length === 6) {
           path.bezierCurveTo(
-            ...(scaleSegment(width, height, lineSegment) as [
+            ...(scaleSegment(ctx, lineSegment) as [
               number,
               number,
               number,
@@ -441,33 +437,25 @@ const { props } = Astro;
     });
   }
 
-  function drawLines(
-    width: number,
-    height: number,
-    ctx: CanvasRenderingContext2D,
-  ) {
+  function drawLines(ctx: CanvasRenderingContext2D) {
+    const { width, height } = ctx.canvas;
     ctx.clearRect(0, 0, width, height);
     paths.forEach((path) => ctx.stroke(path));
   }
 
-  function animateLines(
-    width: number,
-    height: number,
-    ctx: CanvasRenderingContext2D,
-    i = 0,
-  ) {
-    const dashLength = getDashLength(width, height);
+  function animateLines(ctx: CanvasRenderingContext2D, i = 0) {
+    const dashLength = getDashLength(ctx);
     i += animStep;
 
     console.log(dashLength);
 
     ctx.lineDashOffset = dashLength - i;
 
-    requestAnimationFrame(() => drawLines(width, height, ctx));
+    requestAnimationFrame(() => drawLines(ctx));
 
     if (i >= dashLength) return;
 
-    requestAnimationFrame(() => animateLines(width, height, ctx, i));
+    requestAnimationFrame(() => animateLines(ctx, i));
   }
 
   function attachWaveAnimation() {
@@ -487,19 +475,19 @@ const { props } = Astro;
     ctx.canvas.width = width;
     ctx.canvas.height = height;
 
-    requestAnimationFrame(() => setCtxOptions(width, height, ctx));
-    requestAnimationFrame(() => generateLines(width, height));
-    requestAnimationFrame(() => drawLines(width, height, ctx));
-    requestAnimationFrame(() => animateLines(width, height, ctx));
+    requestAnimationFrame(() => setCtxOptions(ctx));
+    requestAnimationFrame(() => generateLines(ctx));
+    requestAnimationFrame(() => drawLines(ctx));
+    requestAnimationFrame(() => animateLines(ctx));
 
     window.addEventListener("resize", () => {
       const { width, height } = canvas.getBoundingClientRect();
       ctx.canvas.width = width;
       ctx.canvas.height = height;
 
-      requestAnimationFrame(() => setCtxOptions(width, height, ctx));
-      requestAnimationFrame(() => generateLines(width, height));
-      requestAnimationFrame(() => drawLines(width, height, ctx));
+      requestAnimationFrame(() => setCtxOptions(ctx));
+      requestAnimationFrame(() => generateLines(ctx));
+      requestAnimationFrame(() => drawLines(ctx));
     });
   }
 

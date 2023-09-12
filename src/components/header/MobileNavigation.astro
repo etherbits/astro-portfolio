@@ -19,44 +19,49 @@ const t = generateTranslator(lang!);
   >
     <Icon icon="Menu" class="stroke-slate-300" />
   </button>
-  <div
-    class="absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60 opacity-0"
-    burger-dropdown
-  >
-    <nav>
-      <ul>
-        {
-          navigationLinks.map((link) => {
-            const navTranslationKey = ("navigation." +
-              link.name) as TranslationKey;
-            return (
-              <li class="flex w-full">
-                <a
-                  href={link.href}
-                  class={cn(
-                    "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
-                    {
-                      "bg-neutral-900/60": pathname === `/${lang}${link.href}`,
-                    },
-                  )}
-                >
-                  {t(navTranslationKey)}
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </nav>
+  <div class="">
     <div
-      class="mx-4 my-2 h-[1px] basis-[100%] rounded-full bg-white bg-gradient-to-r from-neutral-800 to-neutral-900"
+      class="absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60 opacity-0"
+      burger-dropdown
     >
+      <nav>
+        <ul>
+          {
+            navigationLinks.map((link) => {
+              const navTranslationKey = ("navigation." +
+                link.name) as TranslationKey;
+              return (
+                <li class="flex w-full">
+                  <a
+                    href={link.href}
+                    class={cn(
+                      "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
+                      {
+                        "bg-neutral-900/60":
+                          pathname === `/${lang}${link.href}`,
+                      },
+                    )}
+                  >
+                    {t(navTranslationKey)}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+      <div
+        class="mx-4 my-2 h-[1px] basis-[100%] rounded-full bg-white bg-gradient-to-r from-neutral-800 to-neutral-900"
+      >
+      </div>
+      <LanguageToggle />
     </div>
-    <LanguageToggle />
   </div>
 </div>
 
 <script>
+  import animejs from "animejs/lib/anime.es";
+
   const burgerContainer = document.querySelector(
     "[burger-container]",
   ) as HTMLButtonElement | null;
@@ -69,12 +74,30 @@ const t = generateTranslator(lang!);
 
   function openDropdown(dropdown: HTMLDivElement) {
     isOpen = true;
-    dropdown.style.opacity = "1";
+    dropdown.style.display = "block";
+    animejs({
+      targets: "[burger-dropdown]",
+      translateX: 0,
+      translateY: 0,
+      opacity: 1,
+      easing: "easeInQuad",
+      duration: 150,
+    });
   }
 
   function closeDropdown(dropdown: HTMLDivElement) {
     isOpen = false;
-    dropdown.style.opacity = "0";
+    animejs({
+      targets: "[burger-dropdown]",
+      translateX: "1.5rem",
+      opacity: 0,
+      easing: "easeOutQuad",
+      duration: 150,
+      complete: function () {
+        dropdown.style.display = "none";
+        dropdown.style.transform = "translateX(0) translateY(-1.5rem)";
+      },
+    });
   }
 
   function toggleDropdown(dropdown: HTMLDivElement) {
@@ -101,5 +124,4 @@ const t = generateTranslator(lang!);
   document.addEventListener("click", (e) =>
     closeOnOutsideClick(e, burgerDropdown!),
   );
-
 </script>

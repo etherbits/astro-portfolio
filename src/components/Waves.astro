@@ -11,6 +11,7 @@ interface Props extends HTMLAttributes<"svg"> {
 }
 
 const { props } = Astro;
+if(!props.delay) props.delay = 0
 
 const { viewBox, lines } = waveObjs[props.type];
 ---
@@ -33,7 +34,6 @@ const { viewBox, lines } = waveObjs[props.type];
         class="animate-bgLine [stroke-dasharray:100] [stroke-dashoffset:100]"
         pathLength="100"
         style={{
-          animationDelay: props.delay + "s",
           opacity: Math.min(i / 10 + 0.1, 1),
         }}
       />

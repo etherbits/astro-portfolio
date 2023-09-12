@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { cn } from "../utils/tailwind";
 import Icon from "./Icon.astro";
 interface Props {
@@ -28,16 +29,15 @@ const linkObjs = [
 ];
 ---
 
-<ul class={cn("flex w-fit gap-11", props.class)}>
+<ul class={cn("flex w-fit gap-6 sm:gap-11", props.class)}>
   {
     linkObjs.map((link) => (
       <li>
         <a
           href={link.url}
           class={cn(
-            "flex items-center justify-center overflow-hidden rounded-lg border border-slate-600 bg-neutral-950 hover:border-slate-300",
+            "flex items-center justify-center overflow-hidden rounded-lg border border-slate-600 bg-neutral-950 hover:border-slate-300 w-10 h-10 sm:w-12 sm:h-12",
           )}
-          style={{ width: `${props.size}px`, height: `${props.size}px` }}
           target="_blank"
           aria-label="Resume/CV"
         >
@@ -47,7 +47,13 @@ const linkObjs = [
               class="w-1/2 h-1/2 stroke-[1.5px] stroke-slate-500"
             />
           ) : (
-            <img src={link.imageSrc} width="64px" height="64px" alt="resume" />
+            <Image
+              src={link.imageSrc!}
+              width={64}
+              height={64}
+              class="w-full h-full"
+              alt="resume"
+            />
           )}
         </a>
       </li>

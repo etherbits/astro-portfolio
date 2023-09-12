@@ -32,7 +32,6 @@ module.exports = {
       animation: {
         appear: "appear 1s ease-out",
         bgLine: "bgLine 2s ease-in forwards",
-        fgLine: "fgLine 4s linear infinite",
       },
       keyframes: {
         appear: {
@@ -42,33 +41,6 @@ module.exports = {
         bgLine: {
           "0%": { strokeDashoffset: "100" },
           "100%": { strokeDashoffset: "0" },
-        },
-        fgLine: {
-          "0%": {
-            stroke: "#334155",
-            strokeDashoffset: "0",
-            strokeDasharray: "0 100",
-          },
-          "12.5%": {
-            stroke: "#475569",
-            strokeDashoffset: "-25",
-            strokeDasharray: "25 75",
-          },
-          "25%": {
-            stroke: "#4a73a8",
-            strokeDashoffset: "-50",
-            strokeDasharray: "50 50",
-          },
-          "50%": {
-            stroke: "#60a5fa",
-            strokeDashoffset: "-100",
-            strokeDasharray: "0 100",
-          },
-          "100%": {
-            stroke: "#60a5fa",
-            strokeDashoffset: "-100",
-            strokeDasharray: "0 100",
-          },
         },
       },
     },

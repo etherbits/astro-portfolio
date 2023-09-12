@@ -39,21 +39,4 @@ const { viewBox, lines } = waveObjs[props.type];
       />
     ))
   }
-  {
-    lines.map((line, i) => {
-      return (
-        <path
-          d={line.d}
-          class={cn(
-            "stroke-blue-400 [stroke-dasharray:0_100] [stroke-dashoffset:0] animate-fgLine",
-          )}
-          style={{
-            opacity: Math.min(0.1 + i / 10, 1),
-            animationDelay: `${delay + 1.5 + i / 20}s`,
-          }}
-          pathLength="100"
-        />
-      );
-    })
-  }
 </svg>

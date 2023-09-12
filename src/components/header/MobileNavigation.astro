@@ -56,10 +56,6 @@ const t = generateTranslator(lang);
 </div>
 
 <script>
-  // const burgerContainer = document.querySelector(
-  //   "[burger-container]",
-  // ) as HTMLDivElement | null;
-
   const burgerContainer = document.querySelector(
     "[burger-container]",
   ) as HTMLButtonElement | null;
@@ -79,6 +75,7 @@ const t = generateTranslator(lang);
     isOpen = false;
     dropdown.style.opacity = "0";
   }
+
   function toggleDropdown(dropdown: HTMLDivElement) {
     if (isOpen) {
       closeDropdown(dropdown);
@@ -90,6 +87,7 @@ const t = generateTranslator(lang);
 
   function closeOnOutsideClick(e: MouseEvent, dropdown: HTMLDivElement) {
     const target = e.target as HTMLElement;
+
     if (!burgerContainer?.contains(target)) {
       closeDropdown(dropdown);
     }

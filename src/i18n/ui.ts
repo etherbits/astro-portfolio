@@ -3,7 +3,7 @@ export const languages = {
   ka: "Georgian",
 } as const;
 
-export const defaultLang = "ka";
+export const defaultLang = "en";
 
 export type TranslationKey = keyof (typeof ui)[typeof defaultLang];
 

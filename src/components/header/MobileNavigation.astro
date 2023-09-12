@@ -1,0 +1,45 @@
+---
+import { navigationLinks } from "./ResponsiveNavigation.astro";
+import Icon from "../Icon.astro";
+import { generateTranslator, getLangFromUrl } from "../../i18n/utils";
+import type { TranslationKey } from "../../i18n/ui";
+import LanguageToggle from "./LanguageToggle.astro";
+import {cn} from '../../utils/tailwind'
+
+const pathname = Astro.url.pathname
+
+const lang = getLangFromUrl(Astro.url);
+const t = generateTranslator(lang);
+---
+
+<div class="transition-colors relative">
+  <button class={"rounded-md p-3  backdrop-blur-md bg-neutral-950/60 hover:bg-neutral-900/60"}>
+    <Icon icon="Menu" class="stroke-slate-300" />
+  </button>
+  <div
+    class="absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60"
+  >
+    <nav>
+      <ul>
+        {
+          navigationLinks.map((link) => {
+            const navTranslationKey = ("navigation." +
+              link.name) as TranslationKey;
+            return (
+              <li class="flex w-full">
+                <a href={link.href} class={cn("w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60", {"bg-neutral-900/60": pathname === `/${lang}${link.href}` } )}>
+                  {t(navTranslationKey)}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+    <div
+      class="mx-4 my-2 h-[1px] basis-[100%] rounded-full bg-white bg-gradient-to-r from-neutral-800 to-neutral-900"
+    >
+    </div>
+    <LanguageToggle />
+  </div>
+</div>

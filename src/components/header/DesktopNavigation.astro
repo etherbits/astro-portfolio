@@ -2,12 +2,7 @@
 import { cn } from "../../utils/tailwind";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import type { TranslationKey } from "../../i18n/ui";
-export const navigationLinks = [
-  { name: "home", icon: "Home", href: "/" },
-  { name: "projects", icon: "Folder", href: "/projects" },
-  { name: "journey", icon: "Milestone", href: "/journey" },
-  { name: "contact", icon: "Mail", href: "/contact-me" },
-];
+import { navigationLinks } from "./ResponsiveNavigation.astro";
 
 const path = Astro.url.pathname;
 

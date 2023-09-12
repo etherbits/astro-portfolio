@@ -1,6 +1,13 @@
 ---
 import DesktopNavigation from "./DesktopNavigation.astro";
 import MobileNavigation from "./MobileNavigation.astro";
+
+export const navigationLinks = [
+  { name: "home", icon: "Home", href: "/" },
+  { name: "projects", icon: "Folder", href: "/projects" },
+  { name: "journey", icon: "Milestone", href: "/journey" },
+  { name: "contact", icon: "Mail", href: "/contact-me" },
+];
 ---
 
 <div class="hidden md:block">

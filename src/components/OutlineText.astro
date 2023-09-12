@@ -11,7 +11,7 @@ const baseClassName: string =
   "bg-gradient-to-br w-full from-blue-200  [-webkit-text-stroke:2px_transparent] md:[-webkit-text-stroke:4px_transparent]  to-slate-600 bg-clip-text text-center text-[32px] font-extrabold tracking-widest text-black sm:whitespace-nowrap sm:text-clamp-4xl ";
 ---
 
-<div class="relative z-10 w-full select-none">
+<div class="relative w-full select-none">
   <p class={cn(baseClassName, props.class)}><slot /></p>
   {
     props.dropCount &&

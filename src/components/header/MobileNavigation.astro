@@ -9,12 +9,13 @@ import { cn } from "../../utils/tailwind";
 const pathname = Astro.url.pathname;
 
 const lang = getLangFromUrl(Astro.url);
-const t = generateTranslator(lang);
+const t = generateTranslator(lang!);
 ---
 
 <div class="transition-colors relative" burger-container>
   <button
     class={"rounded-md p-3  backdrop-blur-md bg-neutral-950/60 hover:bg-neutral-900/60"}
+    title="toggle burger menu"
   >
     <Icon icon="Menu" class="stroke-slate-300" />
   </button>

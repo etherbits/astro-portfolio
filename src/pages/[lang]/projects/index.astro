@@ -2,18 +2,6 @@
 import Layout from "../../../layouts/Layout.astro";
 import { getLangFromUrl, generateTranslator } from "../../../i18n/utils";
 import { languages } from "../../../i18n/ui";
-
-export function getStaticPaths() {
-  return Object.keys(languages).map((lang) => {
-    const obj = {
-      params: {
-        lang: lang,
-      },
-    };
-    return obj;
-  });
-}
-
 const lang = getLangFromUrl(Astro.url);
 // const t = generateTranslator(lang);
 ---

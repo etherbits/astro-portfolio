@@ -5,18 +5,6 @@ import OutlineText from "../../components/OutlineText.astro";
 import RectLinks from "../../components/RectLinks.astro";
 import Waves from "../../components/Waves.astro";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
-import { languages } from "../../i18n/ui";
-
-export function getStaticPaths() {
-  return Object.keys(languages).map((lang) => {
-    const obj = {
-      params: {
-        lang: lang,
-      },
-    };
-    return obj;
-  });
-}
 
 const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang);

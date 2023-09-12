@@ -31,8 +31,8 @@ module.exports = {
       },
       animation: {
         appear: "appear 1s ease-out",
-        bgLine: "bgLine 1.5s ease-in",
-        fgLine: "fgLine 2s linear infinite",
+        bgLine: "bgLine 2s ease-in forwards",
+        fgLine: "fgLine 4s linear infinite",
       },
       keyframes: {
         appear: {
@@ -44,9 +44,10 @@ module.exports = {
           "100%": { strokeDashoffset: "0" },
         },
         fgLine: {
-          "0%": { opacity: 0, strokeDashoffset: "0", strokeDasharray: "0 100" },
-          "50%": { opacity: 0.5, strokeDashoffset: "-50", strokeDasharray: "50 50" },
-          "100%": { opacity: 1, strokeDashoffset: "-100", strokeDasharray: "0 100" },
+          "0%": { stroke: "#334155", strokeDashoffset: "0", strokeDasharray: "0 100" },
+          "25%": { stroke: "4a73a8", strokeDashoffset: "-50", strokeDasharray: "50 50" },
+          "50%": { stroke: "#60a5fa", strokeDashoffset: "-100", strokeDasharray: "0 100" },
+          "100%": { stroke: "#60a5fa", strokeDashoffset: "-100", strokeDasharray: "0 100" },
         },
       },
     },

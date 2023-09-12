@@ -7,6 +7,7 @@ type WaveKey = keyof typeof waveObjs;
 
 interface Props extends HTMLAttributes<"svg"> {
   type: WaveKey;
+  delay: number;
 }
 
 const { props } = Astro;
@@ -29,9 +30,10 @@ const { viewBox, lines } = waveObjs[props.type];
     lines.map((line, i) => (
       <path
         d={line.d}
-        class="animate-bgLine [stroke-dasharray:100]"
+        class="animate-bgLine [stroke-dasharray:100] [stroke-dashoffset:100]"
         pathLength="100"
         style={{
+          animationDelay: props.delay + "s",
           opacity: Math.min(i / 10 + 0.1, 1),
         }}
       />
@@ -39,13 +41,13 @@ const { viewBox, lines } = waveObjs[props.type];
   }
   {
     lines.map((line, i) => {
-      console.log(i);
       return (
         <path
           d={line.d}
-          class={cn("stroke-blue-400 [stroke-dasharray:0_100] animate-fgLine")}
+          class={cn("stroke-blue-400 [stroke-dasharray:0_100] [stroke-dashoffset:0] animate-fgLine")}
           style={{
-            animationDelay: `${1.5 + i / 20}s`,
+            opacity: Math.min(0.1+ i / 10, 1),
+            animationDelay: `${props.delay + 1.5 + i / 20}s`,
           }}
           pathLength="100"
         />

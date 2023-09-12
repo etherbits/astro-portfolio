@@ -30,17 +30,23 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       animation: {
-        appear: "appear 1s linear",
-        line: "line 1s infinite",
+        appear: "appear 1s ease-out",
+        bgLine: "bgLine 1.5s ease-in",
+        fgLine: "fgLine 2s linear infinite",
       },
       keyframes: {
         appear: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        line: {
-          "0%": { strokeDashoffset: "1520" },
+        bgLine: {
+          "0%": { strokeDashoffset: "100" },
           "100%": { strokeDashoffset: "0" },
+        },
+        fgLine: {
+          "0%": { opacity: 0, strokeDashoffset: "0", strokeDasharray: "0 100" },
+          "50%": { opacity: 0.5, strokeDashoffset: "-50", strokeDasharray: "50 50" },
+          "100%": { opacity: 1, strokeDashoffset: "-100", strokeDasharray: "0 100" },
         },
       },
     },

@@ -33,6 +33,7 @@ const { viewBox, lines } = waveObjs[props.type];
         class="animate-bgLine [stroke-dasharray:100] [stroke-dashoffset:100]"
         pathLength="100"
         style={{
+          animationDelay: `${i / 16}s`,
           opacity: Math.min(i / 10 + 0.1, 1),
         }}
       />

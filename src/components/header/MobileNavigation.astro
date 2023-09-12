@@ -4,20 +4,23 @@ import Icon from "../Icon.astro";
 import { generateTranslator, getLangFromUrl } from "../../i18n/utils";
 import type { TranslationKey } from "../../i18n/ui";
 import LanguageToggle from "./LanguageToggle.astro";
-import {cn} from '../../utils/tailwind'
+import { cn } from "../../utils/tailwind";
 
-const pathname = Astro.url.pathname
+const pathname = Astro.url.pathname;
 
 const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang);
 ---
 
-<div class="transition-colors relative">
-  <button class={"rounded-md p-3  backdrop-blur-md bg-neutral-950/60 hover:bg-neutral-900/60"}>
+<div class="transition-colors relative" burger-container>
+  <button
+    class={"rounded-md p-3  backdrop-blur-md bg-neutral-950/60 hover:bg-neutral-900/60"}
+  >
     <Icon icon="Menu" class="stroke-slate-300" />
   </button>
   <div
-    class="absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60"
+    class="absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60 opacity-0"
+    burger-dropdown
   >
     <nav>
       <ul>
@@ -27,7 +30,15 @@ const t = generateTranslator(lang);
               link.name) as TranslationKey;
             return (
               <li class="flex w-full">
-                <a href={link.href} class={cn("w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60", {"bg-neutral-900/60": pathname === `/${lang}${link.href}` } )}>
+                <a
+                  href={link.href}
+                  class={cn(
+                    "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
+                    {
+                      "bg-neutral-900/60": pathname === `/${lang}${link.href}`,
+                    },
+                  )}
+                >
                   {t(navTranslationKey)}
                 </a>
               </li>
@@ -43,3 +54,53 @@ const t = generateTranslator(lang);
     <LanguageToggle />
   </div>
 </div>
+
+<script>
+  // const burgerContainer = document.querySelector(
+  //   "[burger-container]",
+  // ) as HTMLDivElement | null;
+
+  const burgerContainer = document.querySelector(
+    "[burger-container]",
+  ) as HTMLButtonElement | null;
+
+  const burgerDropdown = document.querySelector(
+    "[burger-dropdown]",
+  ) as HTMLDivElement | null;
+
+  let isOpen = false;
+
+  function openDropdown(dropdown: HTMLDivElement) {
+    isOpen = true;
+    dropdown.style.opacity = "1";
+  }
+
+  function closeDropdown(dropdown: HTMLDivElement) {
+    isOpen = false;
+    dropdown.style.opacity = "0";
+  }
+  function toggleDropdown(dropdown: HTMLDivElement) {
+    if (isOpen) {
+      closeDropdown(dropdown);
+      return;
+    }
+
+    openDropdown(dropdown);
+  }
+
+  function closeOnOutsideClick(e: MouseEvent, dropdown: HTMLDivElement) {
+    const target = e.target as HTMLElement;
+    if (!burgerContainer?.contains(target)) {
+      closeDropdown(dropdown);
+    }
+  }
+
+  burgerContainer?.addEventListener("click", () =>
+    toggleDropdown(burgerDropdown!),
+  );
+
+  document.addEventListener("click", (e) =>
+    closeOnOutsideClick(e, burgerDropdown!),
+  );
+
+</script>

@@ -20,6 +20,9 @@ dependencies:
   '@types/animejs':
     specifier: ^3.1.7
     version: 3.1.7
+  animejs:
+    specifier: ^3.2.1
+    version: 3.2.1
   astro:
     specifier: ^3.0.12
     version: 3.0.12
@@ -995,6 +998,10 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /animejs@3.2.1:
+    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
     dev: false
 
   /ansi-align@3.0.1:

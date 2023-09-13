@@ -27,75 +27,53 @@ const { viewBox, lines } = waveObjs[props.type];
   svg-waves
   {...props}
 >
-  {
-    lines.map((line) => (
-      <path
-        d={line.d}
-        class="[stroke-dasharray:100] [stroke-dashoffset:100]"
-        pathLength="100"
-        bg-lines
-      />
-    ))
-  }
+  {lines.map((line) => <path d={line.d} bg-lines />)}
   {
     lines.map((line) => {
-      return (
-        <path
-          d={line.d}
-          class={cn(
-            "stroke-blue-400 [stroke-dasharray:0_100] [stroke-dashoffset:0]",
-          )}
-          pathLength="100"
-          fg-lines
-        />
-      );
+      return <path d={line.d} fg-lines />;
     })
   }
 </svg>
 
 <script>
-  import { gsap } from "gsap";
+  import anime from "animejs/lib/anime.es";
   const svgWaves = document.querySelectorAll("[svg-waves]");
 
   function attachLineAnimations() {
     svgWaves.forEach((wave, i) => {
       const bgLines = wave.querySelectorAll("[bg-lines]");
-      const fgLines = wave.querySelectorAll("[fg-lines]");
-
-      bgLines.forEach((lines, j) => {
-        gsap.fromTo(
-          lines,
-          {
-            strokeDashoffset: 100,
-            opacity: 0,
-            duration: 2,
-            ease: "power1.out",
-            delay: i * 2 + j / 20,
-          },
-          {
-            strokeDashoffset: 0,
-            opacity: Math.min((j + 1) / 10, 1),
-            duration: 2,
-            ease: "power1.out",
-            delay: i * 2 + j / 20,
-          },
-        );
+      const fgLines = wave.querySelectorAll(
+        "[fg-lines]",
+      ) as NodeListOf<SVGPathElement>;
+      anime({
+        targets: bgLines,
+        strokeDashoffset: [anime.setDashoffset, 0],
+        opacity: (_: SVGPathElement, j: number) => [0.1, (j + 1) / 10],
+        easing: "easeInOutSine",
+        duration: 2000,
+        delay: function (_, i) {
+          return i * 150;
+        },
+        loop: false,
       });
-      fgLines.forEach((lines, j) => {
-        gsap.to(lines, {
-          keyframes: {
-            stroke: ["#94a3b8", "#22d3ee", "#38bdf8", "#60a5fa"],
-            opacity: [0.1, Math.min((j + 1) / 10, 1)],
-            strokeDashoffset: [0, -100],
-            strokeDasharray: [0, 100],
-          },
-          delay: 4 + i * 3 + j / 50,
-          rotation: 0.01,
-          repeatDelay: 3,
-          duration: 3,
-          ease: "power1.in",
-          repeat: Infinity,
-        });
+
+      anime({
+        targets: fgLines,
+        strokeDashoffset: (el: SVGPathElement) => {
+          return [anime.setDashoffset, -el.getTotalLength()];
+        },
+        easing: "linear",
+        stroke: ["#60a5fa", "#3b82f6", "#2563eb"],
+        opacity: (_: any, j: number) => [
+          1 - (fgLines.length - (j + 1)) / fgLines.length,
+          0,
+          0,
+        ],
+        duration: 2000,
+        delay: (_, j) => {
+          return 2000 + j * 150;
+        },
+        loop: true,
       });
     });
   }

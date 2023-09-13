@@ -24,24 +24,81 @@ const { viewBox, lines } = waveObjs[props.type];
     "fixed pointer-events-none overflow-hidden stroke-slate-700 stroke-[2px]",
     props.class,
   )}
+  svg-waves
   {...props}
 >
   {
-    lines.map((line, i) => (
+    lines.map((line) => (
       <path
         d={line.d}
-        class="animate-bgLine [stroke-dasharray:100] [stroke-dashoffset:100]"
+        class="[stroke-dasharray:100] [stroke-dashoffset:100]"
         pathLength="100"
-        style={{
-          animationDelay: `${i / 16}s`,
-          opacity: Math.min(i / 10 + 0.1, 1),
-        }}
+        bg-lines
       />
     ))
+  }
+  {
+    lines.map((line) => {
+      return (
+        <path
+          d={line.d}
+          class={cn(
+            "stroke-blue-400 [stroke-dasharray:0_100] [stroke-dashoffset:0]",
+          )}
+          pathLength="100"
+          fg-lines
+        />
+      );
+    })
   }
 </svg>
 
 <script>
-import {gsap} from 'gsap'
+  import { gsap } from "gsap";
+  const svgWaves = document.querySelectorAll("[svg-waves]");
 
+  function attachLineAnimations() {
+    svgWaves.forEach((wave, i) => {
+      const bgLines = wave.querySelectorAll("[bg-lines]");
+      const fgLines = wave.querySelectorAll("[fg-lines]");
+
+      bgLines.forEach((lines, j) => {
+        gsap.fromTo(
+          lines,
+          {
+            strokeDashoffset: 100,
+            opacity: 0,
+            duration: 2,
+            ease: "power1.out",
+            delay: i * 2 + j / 20,
+          },
+          {
+            strokeDashoffset: 0,
+            opacity: Math.min((j + 1) / 10, 1),
+            duration: 2,
+            ease: "power1.out",
+            delay: i * 2 + j / 20,
+          },
+        );
+      });
+      fgLines.forEach((lines, j) => {
+        gsap.to(lines, {
+          keyframes: {
+            stroke: ["#94a3b8", "#22d3ee", "#38bdf8", "#60a5fa"],
+            opacity: [0.1, Math.min((j + 1) / 10, 1)],
+            strokeDashoffset: [0, -100],
+            strokeDasharray: [0, 100],
+          },
+          delay: 4 + i * 3 + j / 50,
+          rotation: 0.01,
+          repeatDelay: 3,
+          duration: 3,
+          ease: "power1.in",
+          repeat: Infinity,
+        });
+      });
+    });
+  }
+
+  attachLineAnimations();
 </script>

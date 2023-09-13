@@ -21,16 +21,17 @@ const { viewBox, lines } = waveObjs[props.type];
   xmlns="http://www.w3.org/2000/svg"
   preserveAspectRatio="none"
   class={cn(
-    "fixed pointer-events-none overflow-hidden stroke-slate-700 stroke-[2px]",
+    "fixed pointer-events-none overflow-hidden stroke-slate-700 stroke-[2px] ",
     props.class,
   )}
   svg-waves
+  animation-delay={delay}
   {...props}
 >
-  {lines.map((line) => <path d={line.d} bg-lines />)}
+  {lines.map((line) => <path d={line.d} class="opacity-0" bg-lines />)}
   {
     lines.map((line) => {
-      return <path d={line.d} fg-lines />;
+      return <path d={line.d} class="opacity-0" fg-lines />;
     })
   }
 </svg>
@@ -39,28 +40,50 @@ const { viewBox, lines } = waveObjs[props.type];
   import anime from "animejs/lib/anime.es";
   const svgWaves = document.querySelectorAll("[svg-waves]");
 
+  const bgDuration = 1000;
+  const bgPathDelayIncrement = 50;
+
+  const fgDuration = 1500;
+  const fgPathDelayIncrement = 50;
+
   function attachLineAnimations() {
+    const bgTl = anime.timeline();
+    const fgTl = anime.timeline({ autoplay: false, loop: true });
+
+    bgTl.finished.then(fgTl.play);
+
     svgWaves.forEach((wave, i) => {
       const bgLines = wave.querySelectorAll("[bg-lines]");
-      const fgLines = wave.querySelectorAll(
-        "[fg-lines]",
-      ) as NodeListOf<SVGPathElement>;
-      anime({
+      const isEven = i % 2 === 0;
+
+      bgTl.add({
         targets: bgLines,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        opacity: (_: SVGPathElement, j: number) => [0.1, (j + 1) / 10],
-        easing: "easeInOutSine",
-        duration: 2000,
-        delay: function (_, i) {
-          return i * 150;
+        strokeDashoffset: (el: SVGPathElement) => {
+          return isEven
+            ? [anime.setDashoffset, 0]
+            : [-anime.setDashoffset(el), 0];
         },
+        opacity: (_: SVGPathElement, j: number) => [
+          0.1,
+          (j + 1) / (bgLines.length - 1),
+        ],
+        easing: "linear",
+        duration: bgDuration,
+        delay: anime.stagger(bgPathDelayIncrement),
         loop: false,
       });
+    });
 
-      anime({
+    svgWaves.forEach((wave, i) => {
+      const fgLines = wave.querySelectorAll("[fg-lines]");
+      const isEven = i % 2 === 0;
+
+      fgTl.add({
         targets: fgLines,
         strokeDashoffset: (el: SVGPathElement) => {
-          return [anime.setDashoffset, -el.getTotalLength()];
+          return isEven
+            ? [anime.setDashoffset, -el.getTotalLength()]
+            : [-el.getTotalLength(), anime.setDashoffset];
         },
         easing: "linear",
         stroke: ["#60a5fa", "#3b82f6", "#2563eb"],
@@ -69,12 +92,11 @@ const { viewBox, lines } = waveObjs[props.type];
           0,
           0,
         ],
-        duration: 2000,
-        delay: (_, j) => {
-          return 2000 + j * 150;
-        },
-        loop: true,
-      });
+        duration: fgDuration,
+        delay: anime.stagger(fgPathDelayIncrement),
+        loop: false,
+        
+      }, i !== 0 ? `-=${fgDuration*0.6}` : 0);
     });
   }
 

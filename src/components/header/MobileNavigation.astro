@@ -19,109 +19,104 @@ const t = generateTranslator(lang!);
   >
     <Icon icon="Menu" class="stroke-slate-300" />
   </button>
-  <div class="">
+  <section
+    class="hidden absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60 opacity-0"
+    burger-dropdown
+  >
+    <nav>
+      <ul>
+        {
+          navigationLinks.map((link) => {
+            const navTranslationKey = ("navigation." +
+              link.name) as TranslationKey;
+            return (
+              <li class="flex w-full">
+                <a
+                  href={link.href}
+                  class={cn(
+                    "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
+                    {
+                      "bg-neutral-900/60": pathname === `/${lang}${link.href}`,
+                    },
+                  )}
+                >
+                  {t(navTranslationKey)}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
     <div
-      class="absolute right-0 top-[100%] z-20 mt-4 w-40 rounded-md text-slate-200 backdrop-blur-lg bg-neutral-950/60 opacity-0"
-      burger-dropdown
+      class="mx-4 my-2 h-[1px] basis-[100%] rounded-full bg-white bg-gradient-to-r from-neutral-800 to-neutral-900"
     >
-      <nav>
-        <ul>
-          {
-            navigationLinks.map((link) => {
-              const navTranslationKey = ("navigation." +
-                link.name) as TranslationKey;
-              return (
-                <li class="flex w-full">
-                  <a
-                    href={link.href}
-                    class={cn(
-                      "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
-                      {
-                        "bg-neutral-900/60":
-                          pathname === `/${lang}${link.href}`,
-                      },
-                    )}
-                  >
-                    {t(navTranslationKey)}
-                  </a>
-                </li>
-              );
-            })
-          }
-        </ul>
-      </nav>
-      <div
-        class="mx-4 my-2 h-[1px] basis-[100%] rounded-full bg-white bg-gradient-to-r from-neutral-800 to-neutral-900"
-      >
-      </div>
-      <LanguageToggle />
     </div>
-  </div>
+    <LanguageToggle />
+  </section>
 </div>
 
 <script>
-  import animejs from "animejs/lib/anime.es";
+  import { gsap } from "gsap";
 
-  const burgerContainer = document.querySelector(
-    "[burger-container]",
-  ) as HTMLButtonElement | null;
+  function attachAnimation() {
+    const container = document.querySelector(
+      "[burger-container]",
+    ) as HTMLButtonElement | null;
 
-  const burgerDropdown = document.querySelector(
-    "[burger-dropdown]",
-  ) as HTMLDivElement | null;
+    const dropdown = document.querySelector(
+      "[burger-dropdown]",
+    ) as HTMLDivElement | null;
 
-  let isOpen = false;
+    if(!container || !dropdown) return
 
-  function openDropdown(dropdown: HTMLDivElement) {
-    isOpen = true;
-    dropdown.style.display = "block";
-    animejs({
-      targets: "[burger-dropdown]",
-      translateX: 0,
-      translateY: 0,
-      opacity: 1,
-      easing: "easeInQuad",
-      duration: 120,
-    });
-  }
-
-  function closeDropdown(dropdown: HTMLDivElement) {
-    isOpen = false;
-    animejs({
-      targets: "[burger-dropdown]",
-      translateX: "1.5rem",
-      opacity: 0,
-      easing: "easeOutQuad",
-      duration: 120,
-      complete: function () {
-        dropdown.style.display = "none";
-        dropdown.style.transform = "translateX(0) translateY(-1.5rem)";
-      },
-    });
-  }
-
-  function toggleDropdown(dropdown: HTMLDivElement) {
-    if (isOpen) {
-      closeDropdown(dropdown);
-      return;
+    function openDropdown() {
+      gsap.fromTo(
+        dropdown,
+        { translateX: 0, translateY: "-1.5rem", display: "block" },
+        {
+          translateX: 0,
+          translateY: 0,
+          opacity: 1,
+          ease: "power2.out",
+          duration: 0.12,
+        },
+      );
     }
 
-    openDropdown(dropdown);
-  }
-
-  function closeOnOutsideClick(e: MouseEvent, dropdown: HTMLDivElement) {
-    const target = e.target as HTMLElement;
-
-    if (!burgerContainer?.contains(target)) {
-      closeDropdown(dropdown);
+    function closeDropdown() {
+      gsap.to(dropdown, {
+        translateX: "1.5rem",
+        opacity: 0,
+        ease: "power2.out",
+        duration: 0.12,
+        display: "none",
+      });
     }
+
+    function toggleDropdown() {
+      const isOpen = getComputedStyle(dropdown!).display !== "none";
+
+      if (isOpen) {
+        closeDropdown();
+        return;
+      }
+
+      openDropdown();
+    }
+
+    function closeOnOutsideClick(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+
+      if (!container?.contains(target)) {
+        closeDropdown();
+      }
+    }
+
+    container.addEventListener("click", () => toggleDropdown());
+
+    document.addEventListener("click", (e) => closeOnOutsideClick(e));
   }
 
-  burgerContainer?.addEventListener("click", () =>
-    toggleDropdown(burgerDropdown!),
-  );
-
-  document.addEventListener("click", (e) =>
-    closeOnOutsideClick(e, burgerDropdown!),
-  );
+  attachAnimation()
 </script>

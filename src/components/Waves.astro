@@ -25,7 +25,6 @@ const { viewBox, lines } = waveObjs[props.type];
     props.class,
   )}
   svg-waves
-  animation-delay={delay}
   {...props}
 >
   {lines.map((line) => <path d={line.d} class="opacity-0" bg-lines />)}

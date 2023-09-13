@@ -14,9 +14,6 @@ dependencies:
   '@astrojs/vercel':
     specifier: ^4.0.5
     version: 4.0.5(astro@3.0.12)
-  '@fontsource-variable/montserrat':
-    specifier: ^5.0.9
-    version: 5.0.9
   '@types/animejs':
     specifier: ^3.1.7
     version: 3.1.7
@@ -790,10 +787,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@fontsource-variable/montserrat@5.0.9:
-    resolution: {integrity: sha512-TA18z95y4Oo8ABwKXUAVVXQSSqnZ3lTsz2+bBD1Vwl7XivQw8u1bFU/9tEDlSE0ipZhCYiiMxWn4cjUw7Awkcw==}
-    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}

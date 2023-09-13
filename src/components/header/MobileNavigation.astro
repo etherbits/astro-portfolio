@@ -57,7 +57,7 @@ const t = generateTranslator(lang!);
 </div>
 
 <script>
-  import { gsap } from "gsap";
+  import anime from "animejs/lib/anime.es";
 
   function attachAnimation() {
     const container = document.querySelector(
@@ -68,29 +68,33 @@ const t = generateTranslator(lang!);
       "[burger-dropdown]",
     ) as HTMLDivElement | null;
 
-    if(!container || !dropdown) return
+    if (!container || !dropdown) {
+      return;
+    }
 
     function openDropdown() {
-      gsap.fromTo(
-        dropdown,
-        { translateX: 0, translateY: "-1.5rem", display: "block" },
-        {
-          translateX: 0,
-          translateY: 0,
-          opacity: 1,
-          ease: "power2.out",
-          duration: 0.12,
-        },
-      );
+      dropdown!.style.display = "block";
+
+      anime({
+        targets: dropdown,
+        translateX: [0, 0],
+        translateY: [-24, 0],
+        opacity: 1,
+        duration: 100,
+        easing: "easeOutQuart",
+      });
     }
 
     function closeDropdown() {
-      gsap.to(dropdown, {
-        translateX: "1.5rem",
+      anime({
+        targets: dropdown,
+        translateX: 24,
         opacity: 0,
-        ease: "power2.out",
-        duration: 0.12,
-        display: "none",
+        duration: 200,
+        easing: "easeOutQuart",
+        complete: () => {
+          dropdown!.style.display = "none";
+        },
       });
     }
 
@@ -118,5 +122,5 @@ const t = generateTranslator(lang!);
     document.addEventListener("click", (e) => closeOnOutsideClick(e));
   }
 
-  attachAnimation()
+  attachAnimation();
 </script>

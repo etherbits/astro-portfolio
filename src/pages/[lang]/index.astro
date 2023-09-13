@@ -7,7 +7,7 @@ import Waves from "../../components/Waves.astro";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const t = generateTranslator(lang);
+const t = generateTranslator(lang!);
 ---
 
 <Layout title="Welcome to Astro.">

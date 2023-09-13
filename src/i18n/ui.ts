@@ -1,6 +1,6 @@
 export const languages = {
   en: "English",
-  ka: "Georgian",
+  ka: "ქართული",
 } as const;
 
 export const defaultLang = "en";

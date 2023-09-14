@@ -1,17 +1,125 @@
 ---
+import { cn } from "../utils/tailwind";
+import Button from "./Button.astro";
+import { getLangFromUrl, generateTranslator } from "../i18n/utils";
+
 type Props = {
   title: string;
   description: string;
+  image: string;
+  repoLink: string;
+  websiteLink?: string;
+  demoLink?: string;
+  disclamer?: string;
   tags: string[];
+  reverse: boolean;
 };
+
+const lang = getLangFromUrl(Astro.url);
+const t = generateTranslator(lang!);
 
 const { props } = Astro;
 ---
 
----
-<section>
-  <h3>{props.title}</h3>
-  <p>{props.description}</p>
-  <ul>{props.tags.map((tag) => <li>{tag}</li>)}</ul>
+<section
+  class={
+    cn(
+      "flex w-full flex-col  md:flex-row md:items-center md:justify-center md:gap-[5vw] md:px-12",
+      { "md:flex-row-props.reverse": props.reverse },
+    )
+  }
+   >
+  <div class="relative md:h-fit md:basis-[clamp(24rem,46%,46rem)]">
+    <img
+      src={props.image}
+      width={1022}
+      height={632}
+      alt={props.title}
+      class="mx-auto mb-8 w-[90%] md:w-[100%]"
+    />
+    <img
+      src="/images/laptop-blob.svg"
+      width={70}
+      height={198}
+      alt="blob"
+      class={cn(
+        "absolute top-1/2 z-[-1] h-[56%] w-1/2  translate-y-[-50%] blur-[40px] md:blur-[64px] 2xl:blur-[96px]",
+        { "left-[10%]": !props.reverse },
+        { "right-[10%]": props.reverse },
+      )}
+    />
+  </div>
+  <div class="flex flex-col md:basis-[clamp(24rem,44%,44rem)]">
+    <h3 class="mb-4 text-xl font-medium md:mb-8 md:text-clamp-xl">
+      {props.title}
+    </h3>
+    <p class="mb-4 text-sm md:mb-8 md:text-clamp-rg md:leading-[160%]">
+      {props.description}
+    </p>
+    <ul
+      class="mb-8 flex max-w-full flex-wrap gap-3 text-[0.75rem] text-slate-300 md:mb-10 md:text-clamp-xm"
+    >
+      {
+        props.tags.map((tag) => (
+          <li class="border-1 rounded-[4px] border border-slate-400 px-2 py-1">
+            {tag}
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex flex-col">
+      {
+        props.disclamer && (
+          <p class="mb-6 text-right text-sm text-slate-400">
+            {props.disclamer}
+          </p>
+        )
+      }
+      <div class="ml-auto flex items-center gap-8">
+        {
+          props.websiteLink && (
+            <div>
+              <a href={props.websiteLink}>
+                <Button class="text-sm md:text-clamp-rg">
+                  {t("projects.webpage_button")}
+                </Button>
+              </a>
+            </div>
+          )
+        }
+        {
+          props.demoLink && (
+            <div>
+              <a href={props.demoLink}>
+                <Button class="text-sm md:text-clamp-rg">
+                  {t("projects.demo_button")}
+                </Button>
+              </a>
+            </div>
+          )
+        }
+
+        <a href={props.repoLink}>
+          <div class="md:hidden">
+            <img
+              src="/images/github.webp"
+              width={42}
+              height={42}
+              alt="github link"
+              class="border-1 h-10 w-10 rounded-md border border-slate-600"
+            />
+          </div>
+          <div class="hidden md:block">
+            <img
+              src="/images/github.webp"
+              width={48}
+              height={48}
+              alt="github link"
+              class="border-1 h-11 w-11 rounded-md border border-slate-600"
+            />
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 </section>
- ---

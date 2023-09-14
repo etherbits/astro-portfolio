@@ -1,8 +1,8 @@
 ---
 title: "UniSpace"
-description: "ქართულია :დ"
+description: "Unispace-ი არის პლატფორმა UniLab-ის (ილიას სახელმწიფო უნივერსიტეტის პროფესიული აქსელერაციის პროგრამა) ლექტორებისა და სტუდენტებისთვის. ეს პლატფორმა აძლევს ლექტორებს შესაძლებლობას, რომ კურსების და მონაწილეების მენეჯმენტი შეძლონ. პარალელურად სტუდენტებს აძლევს საშვალებას მოიძიონ ინფორმაცია კურსებზე და გაწევრიანდნენ. მე და კიდევ ერთ დეველოპერს, მინდია არაბულს, დაგვავალეს საიტის front-end-ის აწყობა, UI/UX გუნდებიდან მიღებული დიზაინების მიხედვით. ასევე, მჭიდრო კავშირი გვქონდა back-end დეველოპერებთან, რათა ისეთი API გაგვეწერა, რომელიც front-ს მოერგებოდა."
 image: "/images/unispace-laptop.webp"
 repoLink: "https://github.com/etherbits/Unilab-Internal-System"
-disclamer: "* Does not support mobile for now"
+disclamer: "*დროებით მობაილისთვის მზად არაა"
 tags: ["sometihng", "something", "something", "sometihng", "something", "something"]
 ---

@@ -9,7 +9,7 @@ const projectCollection = defineCollection({
     repoLink: z.string().url(),
     websiteLink: z.string().url().optional(),
     demoLink: z.string().url().optional(),
-    disclamer: z.string().min(1),
+    disclamer: z.string().min(1).max(128).optional(),
     tags: z.array(z.string().min(1).max(32)).min(5).max(10),
   }),
 });

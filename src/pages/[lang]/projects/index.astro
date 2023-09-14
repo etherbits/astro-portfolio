@@ -10,17 +10,18 @@ const t = generateTranslator(lang);
 const projects = await getCollection("projects", (project) =>
   project.slug.startsWith(lang),
 );
-console.log(projects);
 ---
 
 <Layout title="projects">
   <OutlineText class="md:text-clamp-3xl">{t("projects.title")}</OutlineText>
-  <ul>
+  <ul
+    class="my-9 flex flex-col items-center gap-24 px-8 md:my-[8vh] md:gap-[8vh]"
+  >
     {
       projects.map((project) => {
         return (
           <li>
-            <ProjectCard {...project.data} />
+            <ProjectCard {...project.data} reverse />
           </li>
         );
       })

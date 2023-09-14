@@ -19,7 +19,12 @@ export async function getProjects(lang: keyof typeof ui) {
     project.slug.startsWith(lang),
   );
 
-  const mergedProjects = projects.map(project => ({ ...project.data, ...commonData[project.data.id] }))
-  mergedProjects.sort((a, b)=>b.order-a.order)
-  return mergedProjects
+  const mergedProjects = projects.map((project) => ({
+    ...project.data,
+    ...commonData[project.data.id],
+  }));
+
+  mergedProjects.sort((a, b) => a.order - b.order);
+
+  return mergedProjects;
 }

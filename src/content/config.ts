@@ -1,9 +1,9 @@
 import { defineCollection, z } from "astro:content";
-import { commonDataSchema} from "./projects/commonData";
+import { commonDataObjectSchema } from "./projects/commonData";
 const projectCollection = defineCollection({
   type: "content",
   schema: z.object({
-    id: commonDataSchema.keyof(),
+    id: commonDataObjectSchema.keyof(),
     description: z.string().min(1).max(1000),
     disclamer: z.string().min(1).max(128).optional(),
   }),

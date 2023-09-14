@@ -3,7 +3,6 @@ import { cn } from "../../utils/tailwind";
 
 export interface InputWrapperProps {
   label: string;
-  errors: {};
   wrapperClass?: HTMLDivElement["className"];
   name: string;
 }
@@ -16,5 +15,5 @@ const { props } = Astro;
     <span class="md:text-lg">{props.label}</span>
     <slot />
   </label>
-  <p class="text-sm text-red-500">{props.errors[props.name]?.message}</p>
+  <p class="text-sm text-red-500 empty:my-0 mt-3" id={`${props.name}-error`} error-message></p>
 </div>

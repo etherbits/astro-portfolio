@@ -10,20 +10,17 @@ export const POST: APIRoute = async ({ request }) => {
     message: formData.get("message"),
   };
 
-  console.log(contactData)
-
   const zodRes = contactMeSchema.safeParse(contactData);
 
   if (!zodRes.success) {
-    console.log(zodRes.error.format())
-    return new Response(JSON.stringify(zodRes.error.format()), { status: 422 });
+    return new Response(JSON.stringify(zodRes.error.issues), { status: 422 });
   }
 
-  const resendRes = await sendContactMail(zodRes.data)
+  const resendRes = await sendContactMail(zodRes.data);
 
   if (!resendRes) {
-    return new Response("Resend could not send email", { status: 500 })
+    return new Response("Resend could not send email", { status: 500 });
   }
 
-  return new Response("ok", { status: 200 });
+  return new Response("success", { status: 200 });
 };

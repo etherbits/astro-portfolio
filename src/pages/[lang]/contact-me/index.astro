@@ -32,7 +32,7 @@ const t = generateTranslator(lang);
             label={t("contact.name_label")}
             placeholder={t("contact.name_placeholder")}
             name="name"
-            errors={{}}
+            required
           />
           <Input
             icon="Mail"
@@ -41,31 +41,21 @@ const t = generateTranslator(lang);
             label={t("contact.email_label")}
             placeholder={t("contact.email_placeholder")}
             name="email"
-            errors={{}}
+            required
           />
         </div>
         <TextArea
           label={t("contact.message_label")}
           name="message"
           placeholder={t("contact.message_placeholder")}
-          errors={{}}
+          required
         />
-        <!-- { -->
-        <!--   mailStatus.type && ( -->
-        <!--     <p -->
-        <!--       class={cn( -->
-        <!--         "text-sm text-slate-400 md:text-base", -->
-        <!--         { -->
-        <!--           "text-red-500": mailStatus.type === "error", -->
-        <!--         }, -->
-        <!--         { "text-emerald-400": mailStatus.type === "success" }, -->
-        <!--       )} -->
-        <!--     > -->
-        <!--       {mailStatus.message} -->
-        <!--     </p> -->
-        <!--   ) -->
-        <!-- } -->
         <Button type="submit">{t("contact.send_button")}</Button>
+        <p
+          id="status-message"
+          class="text-sm text-slate-400 md:text-base empty:mt-0 mt-3"
+        >
+        </p>
       </form>
       <section class="flex w-fit flex-col items-start gap-6">
         <h4>{t("contact.contact_info_title")}</h4>
@@ -86,15 +76,70 @@ const t = generateTranslator(lang);
 </Layout>
 
 <script>
+  import type { ZodIssue } from "astro/zod";
+  import { getLangFromUrl, translateZodErrors } from "../../../i18n/utils";
+  import type { languages } from "../../../i18n/ui";
+  const lang = getLangFromUrl(
+    new URL(window.location.href),
+  ) as keyof typeof languages;
+
   const contactForm = document.querySelector("[contact-form]");
+
+  function changeStatus(message: string, type: "normal" | "error" | "success") {
+    const statusMessageEl = document.getElementById(
+      "status-message",
+    ) as HTMLParagraphElement;
+    statusMessageEl.innerHTML = message;
+    switch (type) {
+      case "normal":
+        statusMessageEl.style.color = "#94a3b8";
+        break;
+      case "error":
+        statusMessageEl.style.color = "#ef4444";
+        break;
+      case "success":
+        statusMessageEl.style.color = "#34d399";
+        break;
+    }
+  }
+
+  function resetErrorMessages() {
+    const errMessageEls = document.querySelectorAll("[error-message]");
+    errMessageEls.forEach((el) => (el.innerHTML = ""));
+  }
+
+  function handleFormErrors(issues: ZodIssue[]) {
+    translateZodErrors(issues, lang);
+
+    issues.forEach((err) => {
+      const el = document.getElementById(`${err.path[0]}-error`);
+
+      if (!el) return;
+
+      el.innerText = err.message;
+    });
+
+    changeStatus("Could not send your mail", "error");
+  }
 
   async function submit(e: Event) {
     e.preventDefault();
+
+    changeStatus("Sending mail...", "normal");
+    resetErrorMessages();
+
     const res = await fetch("/api/send-mail", {
       method: "POST",
       body: new FormData(e.currentTarget as HTMLFormElement),
     });
-    console.log(res.status);
+
+    if (!res.ok) {
+      const fieldErrors: ZodIssue[] = await res.json();
+      handleFormErrors(fieldErrors);
+      return;
+    }
+
+    changeStatus("Successfully sent your mail!", "success");
   }
 
   contactForm?.addEventListener("submit", (e) => {

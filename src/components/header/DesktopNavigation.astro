@@ -7,7 +7,7 @@ import { navigationLinks } from "./ResponsiveNavigation.astro";
 const path = Astro.url.pathname;
 
 const lang = getLangFromUrl(Astro.url);
-const t = generateTranslator(lang);
+const t = generateTranslator(lang!);
 ---
 
 <nav class="hidden md:block">

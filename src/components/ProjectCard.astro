@@ -21,14 +21,7 @@ const t = generateTranslator(lang!);
 const { props } = Astro;
 ---
 
-<section
-  class={
-    cn(
-      "flex w-full flex-col  md:flex-row md:items-center md:justify-center md:gap-[5vw] md:px-12",
-      { "md:flex-row-reverse": props.reverse },
-    )
-  }
-   >
+<section>
   <div class="relative md:h-fit md:basis-[clamp(24rem,46%,46rem)]">
     <img
       src={props.image}

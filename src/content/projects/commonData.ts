@@ -55,7 +55,7 @@ export const commonData = {
     repoLink: "https://github.com/etherbits/octopus",
     tags: ["Tauri", "React", "Typescript", "Zustand", "Tailwind", "Rust"],
     order: 3,
-  }
+  },
 };
 
 const result = commonDataObjectSchema.safeParse(commonData);

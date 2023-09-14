@@ -15,11 +15,11 @@ const journeyCollection = defineCollection({
   schema: z.object({
     title: z.string().min(1).max(128),
     content: z.string().min(1).max(1000),
-    date: z.string().min(1).max(32)
+    date: z.string().min(1).max(32),
   }),
 });
 
 export const collections = {
   projects: projectCollection,
-  journeys: journeyCollection
+  journeys: journeyCollection,
 };

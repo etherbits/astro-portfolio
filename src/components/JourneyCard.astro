@@ -23,7 +23,9 @@ const { props } = Astro;
   )}
 >
   <div class="mb-2 flex items-center justify-between gap-2">
-    <h2 class="text-clamp-xl break-words hyphens-auto">{props.journey.title}</h2>
+    <h2 class="text-clamp-xl break-words hyphens-auto">
+      {props.journey.title}
+    </h2>
     <span class="text-clamp-sm">{props.journey.date}</span>
   </div>
   <p class="text-clamp-rg">{props.journey.content}</p>

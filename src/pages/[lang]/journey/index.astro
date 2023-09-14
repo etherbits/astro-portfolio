@@ -4,9 +4,9 @@ import OutlineText from "../../../components/OutlineText.astro";
 import { getLangFromUrl, generateTranslator } from "../../../i18n/utils";
 
 import { languages } from "../../../i18n/ui";
-import Button from "../../../components/Button.astro";
 import MobileJourneyList from "../../../components/MobileJourneyList.astro";
 import { getCollection } from "astro:content";
+import DesktopJourneyList from "../../../components/DesktopJourneyList.astro";
 
 const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
 const t = generateTranslator(lang);
@@ -15,13 +15,15 @@ const journeys = await getCollection("journeys", (journey) =>
   journey.slug.startsWith(lang),
 );
 
-const journeyDataObjs = journeys.map(journey=>journey.data)
+const journeyDataObjs = journeys.map((journey) => journey.data);
 ---
 
 <Layout title="projects">
   <OutlineText class="md:text-clamp-3xl">{t("journey.title")}</OutlineText>
-  <MobileJourneyList journeys={journeyDataObjs} />
-  <a href="/contact-me">
-    <Button>{t("journey.contact_button")}</Button>
-  </a>
+  <div class="hidden md:block">
+    <DesktopJourneyList journeys={journeyDataObjs} />
+  </div>
+  <div class="md:hidden">
+    <MobileJourneyList journeys={journeyDataObjs} />
+  </div>
 </Layout>

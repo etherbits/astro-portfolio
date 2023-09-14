@@ -10,14 +10,7 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
 ---
 
 <div button-container class={"flex relative group h-auto cursor-pointer"}>
-  <button
-    outline-button
-    type="button"
-    class={cn(
-      baseClass,
-      props.class,
-    )}
-  >
+  <button outline-button type="button" class={cn(baseClass, props.class)}>
     <slot />
   </button>
   <div
@@ -43,7 +36,7 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
       easing: "easeOutQuad",
     });
   }
- 
+
   function startHoverAnim(btn: HTMLButtonElement) {
     animejs({
       targets: btn,
@@ -70,7 +63,7 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
         "[outline-button]",
       ) as HTMLButtonElement;
 
-      resetAnim(btn)
+      resetAnim(btn);
 
       btnContainer.addEventListener("mousedown", () => startClickAnim(btn));
       btnContainer.addEventListener("mouseenter", () => startHoverAnim(btn));

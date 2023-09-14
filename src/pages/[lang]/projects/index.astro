@@ -1,11 +1,29 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import OutlineText from "../../../components/OutlineText.astro";
+import ProjectCard from "../../../components/ProjectCard.astro";
 import { getLangFromUrl, generateTranslator } from "../../../i18n/utils";
 import { languages } from "../../../i18n/ui";
-const lang = getLangFromUrl(Astro.url);
-// const t = generateTranslator(lang);
+const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
+const t = generateTranslator(lang);
+const projects = await getCollection("projects", (project) =>
+  project.slug.startsWith(lang),
+);
+console.log(projects);
 ---
 
 <Layout title="projects">
-  <div>Projects</div>
+  <OutlineText class="md:text-clamp-3xl">{t("projects.title")}</OutlineText>
+  <ul>
+    {
+      projects.map((project) => {
+        return (
+          <li>
+            <ProjectCard {...project.data} />
+          </li>
+        );
+      })
+    }
+  </ul>
 </Layout>

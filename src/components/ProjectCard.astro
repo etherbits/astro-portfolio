@@ -1,0 +1,17 @@
+---
+type Props = {
+  title: string;
+  description: string;
+  tags: string[];
+};
+
+const { props } = Astro;
+---
+
+---
+<section>
+  <h3>{props.title}</h3>
+  <p>{props.description}</p>
+  <ul>{props.tags.map((tag) => <li>{tag}</li>)}</ul>
+</section>
+ ---

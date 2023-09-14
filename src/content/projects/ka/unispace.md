@@ -1,13 +1,11 @@
 ---
 id: unispace
-description: UniSpace is a dedicated platform designed for both 
-    lecturers and students of UniLab, an accelerated program affiliated with 
-    Ilia State University. This platform empowers lecturers with course and 
-    participant management capabilities, while also granting students the 
-    convenience of accessing course information and enrolling. Along with 
-    a fellow developer, Mindia Arabuli, I was entrusted with crafting the front-end of the
-    website, adhering closely to the finalized UI/UX designs provided by our design team. 
-    Additionally, we maintained open communication with our back-end development counterparts
-    to ensure seamless API compatibility.
-disclamer: "*Does not support mobile for now"
+description: Unispace-ი არის პლატფორმა UniLab-ის (ილიას სახელმწიფო უნივერსიტეტის 
+    პროფესიული აქსელერაციის პროგრამა) ლექტორებისა და სტუდენტებისთვის. ეს პლატფორმა 
+    აძლევს ლექტორებს შესაძლებლობას, რომ კურსების და მონაწილეების მენეჯმენტი შეძლონ.
+    პარალელურად სტუდენტებს აძლევს საშვალებას მოიძიონ ინფორმაცია კურსებზე და გაწევრიანდნენ.
+    მე და კიდევ ერთ დეველოპერს, მინდია არაბულს, დაგვავალეს საიტის front-end-ის აწყობა,
+    UI/UX გუნდებიდან მიღებული დიზაინების მიხედვით. ასევე, მჭიდრო კავშირი გვქონდა back-end დეველოპერებთან,
+    რათა ისეთი API გაგვეწერა, რომელიც front-ს მოერგებოდა.
+disclamer: "*დროებით მობაილზე არ მუშაობს"
 ---

@@ -1,10 +1,10 @@
 ---
-id: unispace
-description: Sandro's Books is a website dedicated to showcasing audiobooks authored 
-    by UniLab's director, Sandro Asatiani. The catalog features a diverse range of topics, 
-    with an integrated audio player that offers all the standard user functionalities.
-    My colleague, Mindia Arabuli, and I were responsible for modernizing the existing 
-    codebase into a React Single Page Application (SPA). We also introduced new features, 
-    including playback capabilities and dynamic routing. Throughout this process,
-    we worked closely with the UI/UX design team to bring the envisioned product to life.
+id: sandro
+description: სანდროს წიგნები საიტია შექმნილი უნილაბის დირექტორის, სანდრო ასათიანის,
+    აუდიო წიგნებისთვის. საიტის კატალოგი შემოიფარგლება სხვადახვა საკითხით და შეიცავს 
+    ინტერგრირებულ audio player-ს, რომელსაც ყველა მოსალოდნელი ფუნქციონალი გააჩნია.
+    მე მევალებოდა არსებული კოდის ბაზის თანამედროვე React Single Page Application (SPA)-ზე
+    გადაწერა. ასევე ახალი ფუნქციონალიც დავამატეთ, როგორიცაა playback და dynamic routing-ი.
+    ამ პროცესის განმავლობაში, UI/UX დიზაინერებთან მჭიდროდ ვმუშაობდით,
+    რათა ჩანაფიქრთან რაც შეიძლება ახლო პროდუქტი შეგვექმნა.
 ---

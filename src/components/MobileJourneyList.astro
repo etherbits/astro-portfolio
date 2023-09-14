@@ -1,0 +1,18 @@
+---
+import JourneyCard, { type Journey } from "./JourneyCard.astro";
+interface Props {
+  journeys: Journey[];
+}
+
+const { props } = Astro;
+---
+
+<ul class="mb-14 mt-[4vh] flex w-[100%] flex-col items-center gap-6">
+  {
+    props.journeys.map((journey, i) => (
+      <li>
+        <JourneyCard journey={journey} reverse={i % 2 !== 0} />
+      </li>
+    ))
+  }
+</ul>

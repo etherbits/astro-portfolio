@@ -1,0 +1,30 @@
+---
+import { cn } from "../utils/tailwind";
+
+export type Journey = {
+  title: string;
+  content: string;
+  date: string;
+};
+
+interface Props {
+  reverse: boolean;
+  journey: Journey;
+}
+
+const { props } = Astro;
+---
+
+<!-- style={{ --><!--   background: `linear-gradient(${ --><!--     props.reverse ? "to left" : "to right" --><!--   },neutral-900/30,neutral-700/30)`, --><!-- }} -->
+<section
+  class={cn(
+    "my-auto flex h-fit w-full flex-col rounded-xl bg-gradient-to-r px-6 py-4 backdrop-blur-md from-neutral-900/30 to-neutral-700/30",
+    { "bg-gradient-to-r": props.reverse },
+  )}
+>
+  <div class="mb-2 flex items-center justify-between gap-2">
+    <h2 class="text-clamp-xl break-words hyphens-auto">{props.journey.title}</h2>
+    <span class="text-clamp-sm">{props.journey.date}</span>
+  </div>
+  <p class="text-clamp-rg">{props.journey.content}</p>
+</section>

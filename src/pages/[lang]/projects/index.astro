@@ -1,15 +1,18 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
 import OutlineText from "../../../components/OutlineText.astro";
 import ProjectCard from "../../../components/ProjectCard.astro";
-import { getLangFromUrl, generateTranslator } from "../../../i18n/utils";
+import {
+  getLangFromUrl,
+  generateTranslator,
+  getProjects,
+} from "../../../i18n/utils";
+
 import { languages } from "../../../i18n/ui";
 const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
 const t = generateTranslator(lang);
-const projects = await getCollection("projects", (project) =>
-  project.slug.startsWith(lang),
-);
+
+const projects = await getProjects(lang);
 ---
 
 <Layout title="projects">
@@ -18,10 +21,10 @@ const projects = await getCollection("projects", (project) =>
     class="my-9 flex flex-col items-center gap-24 px-8 md:my-[8vh] md:gap-[8vh]"
   >
     {
-      projects.map((project) => {
+      projects.map((project, i) => {
         return (
           <li>
-            <ProjectCard {...project.data} reverse />
+            <ProjectCard {...project} reverse={i % 2 !== 0} />
           </li>
         );
       })

@@ -9,6 +9,7 @@ import {
 } from "../../../i18n/utils";
 
 import { languages } from "../../../i18n/ui";
+import Button from "../../../components/Button.astro";
 const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
 const t = generateTranslator(lang);
 
@@ -30,4 +31,7 @@ const projects = await getProjects(lang);
       })
     }
   </ul>
+  <a href="/journey">
+    <Button>{t("projects.journey_button")}</Button>
+  </a>
 </Layout>

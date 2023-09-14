@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "../../utils/tailwind";
+import InputWrapper, { type InputWrapperProps } from "./InputWrapper.astro";
+
+type Props = {} & InputWrapperProps & HTMLAttributes<"input">;
+
+const { label, errors, name, wrapperClass, ...rest } = Astro.props;
+---
+
+<InputWrapper
+  label={label}
+  name={name}
+  errors={errors}
+  containerClassName={wrapperClass}
+>
+  <textarea
+    {...rest}
+    class={cn(
+      `min-h-[20vh] rounded-[4px] border border-slate-500 bg-transparent px-4 py-3 text-sm text-slate-300 outline-none placeholder:text-slate-400 focus:border-slate-300 md:text-base`,
+      rest.class,
+    )}></textarea>
+</InputWrapper>

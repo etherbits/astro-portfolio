@@ -1,0 +1,46 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "../../utils/tailwind";
+import Icon, { type IconName } from "../Icon.astro";
+import InputWrapper, { type InputWrapperProps } from "./InputWrapper.astro";
+
+type Props = {
+  icon: IconName;
+} & InputWrapperProps &
+  HTMLAttributes<"input">;
+
+const {
+  label,
+  errors,
+  name,
+  wrapperClass,
+  icon,
+  class: inputClass,
+  ...inputProps
+} = Astro.props;
+---
+
+<InputWrapper
+  label={label}
+  errors={errors}
+  name={name}
+  containerClassName={wrapperClass}
+>
+  <div
+    class={cn(
+      "group flex  w-full items-center gap-4 overflow-hidden  rounded-[4px] border border-slate-500 bg-transparent px-4 py-3 focus-within:border-slate-300 md:gap-5 md:px-5",
+    )}
+  >
+    <Icon
+      icon={icon}
+      class="stroke-slate-500 group-focus-within:stroke-slate-300 w-6 h-6"
+    />
+    <input
+      {...inputProps}
+      class={cn(
+        "w-full text-ellipsis bg-transparent text-slate-300 outline-none placeholder:text-slate-400 md:text-lg",
+        inputClass,
+      )}
+    />
+  </div>
+</InputWrapper>

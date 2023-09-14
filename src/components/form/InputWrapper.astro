@@ -1,0 +1,20 @@
+---
+import { cn } from "../../utils/tailwind";
+
+export interface InputWrapperProps {
+  label: string;
+  errors: {};
+  wrapperClass?: HTMLDivElement["className"];
+  name: string;
+}
+
+const { props } = Astro;
+---
+
+<div class="w-full">
+  <label class={cn("flex w-full flex-col gap-3", props.wrapperClass)}>
+    <span class="md:text-lg">{props.label}</span>
+    <slot />
+  </label>
+  <p class="text-sm text-red-500">{props.errors[props.name]?.message}</p>
+</div>

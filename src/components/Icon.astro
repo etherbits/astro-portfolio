@@ -1,8 +1,10 @@
 ---
-import Icons from "lucide";
+import Icons, { icons } from "lucide";
+
+export type IconName = keyof typeof icons;
 
 interface Props {
-  icon: keyof typeof Icons;
+  icon: IconName;
   class?: string;
 }
 

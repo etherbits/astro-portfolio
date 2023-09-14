@@ -18,7 +18,7 @@ const journeys = await getCollection("journeys", (journey) =>
 const journeyDataObjs = journeys.map((journey) => journey.data);
 ---
 
-<Layout title="projects">
+<Layout title="journeys">
   <OutlineText class="md:text-clamp-3xl">{t("journey.title")}</OutlineText>
   <div class="hidden md:block">
     <DesktopJourneyList journeys={journeyDataObjs} />

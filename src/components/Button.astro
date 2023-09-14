@@ -70,6 +70,8 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
         "[outline-button]",
       ) as HTMLButtonElement;
 
+      resetAnim(btn)
+
       btnContainer.addEventListener("mousedown", () => startClickAnim(btn));
       btnContainer.addEventListener("mouseenter", () => startHoverAnim(btn));
       btnContainer.addEventListener("mouseleave", () => resetAnim(btn));

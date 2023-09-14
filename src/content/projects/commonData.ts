@@ -13,7 +13,7 @@ export const commonDataSchema = z.object({
 export const commonDataObjectSchema = z.object({
   unispace: commonDataSchema,
   sandro: commonDataSchema,
-})
+});
 
 export const commonData = {
   unispace: {
@@ -36,19 +36,12 @@ export const commonData = {
     image: "/images/sandro-laptop.webp",
     repoLink: "https://github.com/etherbits/Unilab-Internal-System",
     websiteLink: "https://tiny-pegasus-d8c812.netlify.app",
-    tags: [
-      "React",
-      "Javascript",
-      "Styled Components",
-      "Zod",
-      "Python",
-      "Flask",
-    ],
+    tags: ["React", "Javascript", "SASS", "Framer Motion", "React Router"],
     order: 1,
-  }
-}
+  },
+};
 
-const result = commonDataSchema.safeParse(commonData);
+const result = commonDataObjectSchema.safeParse(commonData);
 
 if (!result.success) {
   console.error("\x1b[31m", "zod common data error: ", result.error.message);

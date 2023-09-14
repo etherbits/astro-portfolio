@@ -4,6 +4,8 @@ import { defaultLang } from "./i18n/ui";
 
 export const onRequest = defineMiddleware(
   async ({ locals, request, cookies, redirect }, next) => {
+    if (request.method !== "GET") return next();
+
     const url = new URL(request.url);
 
     const urlLocale = getLangFromUrl(url);

@@ -1,16 +1,22 @@
 ---
+import type { HTMLAttributes } from "astro/types";
 import { cn } from "../utils/tailwind";
-interface Props {
+interface Props extends HTMLAttributes<"button"> {
   class?: string;
 }
 
-const { props } = Astro;
+const { class: btnClass, ...rest } = Astro.props;
 const baseClass = `text-base block w-fit whitespace-nowrap rounded-[4px]
 border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clamp-xl`;
 ---
 
 <div button-container class={"flex relative group h-auto cursor-pointer"}>
-  <button outline-button type="button" class={cn(baseClass, props.class)}>
+  <button
+    {...rest}
+    outline-button
+    type="button"
+    class={cn(baseClass, btnClass)}
+  >
     <slot />
   </button>
   <div

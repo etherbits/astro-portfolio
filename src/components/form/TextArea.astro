@@ -16,6 +16,7 @@ const { label, errors, name, wrapperClass, ...rest } = Astro.props;
 >
   <textarea
     {...rest}
+    name={name}
     class={cn(
       `min-h-[20vh] rounded-[4px] border border-slate-500 bg-transparent px-4 py-3 text-sm text-slate-300 outline-none placeholder:text-slate-400 focus:border-slate-300 md:text-base`,
       rest.class,

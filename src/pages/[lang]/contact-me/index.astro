@@ -19,7 +19,11 @@ const t = generateTranslator(lang);
       <OutlineText>{t("contact.title")}</OutlineText>
     </div>
     <main class="py-11 md:w-[720px] md:py-16">
-      <form class="mb-11 flex w-full flex-col items-end gap-6">
+      <form
+        method="POST"
+        class="mb-11 flex w-full flex-col items-end gap-6"
+        contact-form
+      >
         <div class="flex w-full flex-col gap-6 md:flex-row md:gap-8">
           <Input
             icon="User"
@@ -61,9 +65,7 @@ const t = generateTranslator(lang);
         <!--     </p> -->
         <!--   ) -->
         <!-- } -->
-        <div>
-          <Button>{t("contact.send_button")}</Button>
-        </div>
+        <Button type="submit">{t("contact.send_button")}</Button>
       </form>
       <section class="flex w-fit flex-col items-start gap-6">
         <h4>{t("contact.contact_info_title")}</h4>
@@ -82,3 +84,20 @@ const t = generateTranslator(lang);
     </main>
   </div>
 </Layout>
+
+<script>
+  const contactForm = document.querySelector("[contact-form]");
+
+  async function submit(e: Event) {
+    e.preventDefault();
+    const res = await fetch("/api/send-mail", {
+      method: "POST",
+      body: new FormData(e.currentTarget as HTMLFormElement),
+    });
+    console.log(res.status);
+  }
+
+  contactForm?.addEventListener("submit", (e) => {
+    submit(e);
+  });
+</script>

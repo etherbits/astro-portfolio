@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
 import { ui, defaultLang, type TranslationKey } from "./ui";
-import { commonData } from "../content/projects/commonData";
+import { commonData } from "../projectData/commonData";
 import type { ZodIssue } from "astro/zod";
 import type { languages } from "./ui";
 

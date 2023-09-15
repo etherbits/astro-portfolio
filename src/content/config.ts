@@ -1,5 +1,5 @@
 import { defineCollection, z } from "astro:content";
-import { commonDataObjectSchema } from "./projects/commonData";
+import { commonDataObjectSchema } from "../projectData/commonData";
 
 const projectCollection = defineCollection({
   type: "content",

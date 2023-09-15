@@ -14,15 +14,17 @@ const t = generateTranslator(lang);
 const { props } = Astro;
 ---
 
-<ul class="flex w-[100%] flex-col items-center gap-8 px-[2vw] ">
-  {
-    props.journeys.map((journey, i) => (
-      <li>
-        <JourneyCard journey={journey} reverse={i % 2 !== 0} />
-      </li>
-    ))
-  }
+<div class="flex flex-col items-center md:hidden px-[2vw] w-full gap-10">
+  <ul class="flex w-[100%] flex-col items-center gap-8">
+    {
+      props.journeys.map((journey, i) => (
+        <li>
+          <JourneyCard journey={journey} reverse={i % 2 !== 0} />
+        </li>
+      ))
+    }
+  </ul>
   <Link href="/contact-me">
     <Button>{t("journey.contact_button")}</Button>
   </Link>
-</ul>
+</div>

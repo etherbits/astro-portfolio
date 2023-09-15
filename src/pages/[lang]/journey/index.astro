@@ -22,8 +22,6 @@ const journeys = await getJourneys(lang);
     <div class="hidden md:block">
       <DesktopJourneyList journeys={journeys} />
     </div>
-    <div class="md:hidden">
       <MobileJourneyList journeys={journeys} />
-    </div>
   </main>
 </Layout>

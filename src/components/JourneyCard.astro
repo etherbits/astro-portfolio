@@ -15,16 +15,15 @@ interface Props {
 const { props } = Astro;
 ---
 
-<!-- style={{ --><!--   background: `linear-gradient(${ --><!--     props.reverse ? "to left" : "to right" --><!--   },neutral-900/30,neutral-700/30)`, --><!-- }} -->
 <section
   class={cn(
-    "my-auto flex h-fit w-full flex-col break-words hyphens-auto rounded-xl bg-gradient-to-r px-6 py-5 backdrop-blur-md from-neutral-900/30 to-neutral-700/30",
+    "my-auto flex h-fit w-full flex-col break-words hyphens-auto rounded-xl bg-gradient-to-r px-6 py-5 backdrop-blur-md from-neutral-900/30 to-gray-600/20",
     { "bg-gradient-to-r": !props.reverse },
     { "bg-gradient-to-l": props.reverse },
   )}
 >
   <div class="mb-4 flex items-center flex-wrap justify-between gap-2">
-    <h2 class="text-lg break-words hyphens-auto">
+    <h2 class="text-lg break-words hyphens-auto text-slate-200">
       {props.journey.title}
     </h2>
     <span class="text-sm text-slate-400">{props.journey.date}</span>

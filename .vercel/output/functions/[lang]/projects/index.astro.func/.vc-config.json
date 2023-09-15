@@ -1,5 +1,0 @@
-{
-	"runtime": "nodejs18.x",
-	"handler": "dist/pages/_lang_/entry.projects.astro.mjs",
-	"launcherType": "Nodejs"
-}

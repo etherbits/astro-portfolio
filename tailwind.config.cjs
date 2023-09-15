@@ -5,13 +5,6 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
-      fontFamily: {
-        sans: [
-          "Montserrat",
-          "NotoSansGeorgian",
-          ...defaultTheme.fontFamily.sans,
-        ],
-      },
       lineHeight: {
         "clamp-xl": "clamp(2rem, 2.25vw, 3rem)",
       },
@@ -33,24 +26,12 @@ module.exports = {
       width: {
         "clamp-card-container": "clamp(44rem, 84%, 84rem)",
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-      animation: {
-        appear: "appear 1s ease-out",
-        bgLine: "bgLine 2s ease-in forwards",
-      },
-      keyframes: {
-        appear: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
-        },
-        bgLine: {
-          "0%": { strokeDashoffset: "100" },
-          "100%": { strokeDashoffset: "0" },
-        },
+      fontFamily: {
+        sans: [
+          "Montserrat",
+          "NotoSansGeorgian",
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
     },
   },

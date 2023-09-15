@@ -15,5 +15,10 @@ const { props } = Astro;
     <span class="md:text-lg">{props.label}</span>
     <slot />
   </label>
-  <p class="text-sm text-red-500 empty:my-0 mt-3" id={`${props.name}-error`} error-message></p>
+  <p
+    class="text-sm text-red-500 empty:my-0 mt-3"
+    id={`${props.name}-error`}
+    error-message
+  >
+  </p>
 </div>

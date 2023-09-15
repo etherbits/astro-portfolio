@@ -11,5 +11,5 @@ import prefetch from "@astrojs/prefetch";
 export default defineConfig({
   output: "server",
   integrations: [tailwind(), prefetch()],
-  adapter: vercel()
+  adapter: vercel(),
 });

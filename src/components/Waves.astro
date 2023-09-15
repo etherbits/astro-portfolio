@@ -37,15 +37,17 @@ const { viewBox, lines } = waveObjs[props.type];
 
 <script>
   import anime from "animejs/lib/anime.es";
-  const svgWaves = document.querySelectorAll("[svg-waves]");
 
-  const bgDuration = 1000;
-  const bgPathDelayIncrement = 50;
+    const bgDuration = 1000;
+    const bgPathDelayIncrement = 50;
 
-  const fgDuration = 1500;
-  const fgPathDelayIncrement = 50;
+    const fgDuration = 1500;
+    const fgPathDelayIncrement = 50;
 
   function attachLineAnimations() {
+
+    const svgWaves = document.querySelectorAll("[svg-waves]");
+
     const bgTl = anime.timeline();
     const fgTl = anime.timeline({ autoplay: false, loop: true });
 
@@ -102,4 +104,5 @@ const { viewBox, lines } = waveObjs[props.type];
   }
 
   attachLineAnimations();
+  document.addEventListener("astro:after-swap", attachLineAnimations);
 </script>

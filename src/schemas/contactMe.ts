@@ -6,4 +6,4 @@ export const contactMeSchema = z.object({
   message: z.string().min(1).max(1000),
 });
 
-export type ContactMeFormData = z.infer<typeof contactMeSchema>
+export type ContactMeFormData = z.infer<typeof contactMeSchema>;

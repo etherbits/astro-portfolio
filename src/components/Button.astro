@@ -29,10 +29,6 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
 <script>
   import animejs from "animejs/lib/anime.es";
 
-  const btnContainers = document.querySelectorAll(
-    "[button-container]",
-  ) as NodeListOf<HTMLDivElement>;
-
   function startClickAnim(btn: HTMLButtonElement) {
     animejs({
       targets: btn,
@@ -63,7 +59,11 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
     });
   }
 
-  const addTouchAnimation = () =>
+  const addTouchAnimation = () => {
+    const btnContainers = document.querySelectorAll(
+      "[button-container]",
+    ) as NodeListOf<HTMLDivElement>;
+
     btnContainers.forEach((btnContainer) => {
       const btn = btnContainer.querySelector(
         "[outline-button]",
@@ -95,6 +95,8 @@ border border-slate-300 bg-black px-5 py-3 tracking-wider text-slate-300 sm:clam
         resetAnim(btn);
       });
     });
+  };
 
   addTouchAnimation();
+  document.addEventListener("astro:after-swap", addTouchAnimation);
 </script>

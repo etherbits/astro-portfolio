@@ -3,6 +3,7 @@ import { cn } from "../../utils/tailwind";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import type { TranslationKey } from "../../i18n/ui";
 import { navigationLinks } from "./ResponsiveNavigation.astro";
+import Link from '../Link.astro'
 
 const path = Astro.url.pathname;
 
@@ -19,7 +20,7 @@ const t = generateTranslator(lang!);
         const navTranslationKey = ("navigation." + link.name) as TranslationKey;
         return (
           <li>
-            <a
+            <Link
               href={link.href}
               class={cn({ "text-slate-300": path === `/${lang}${link.href}` })}
             >

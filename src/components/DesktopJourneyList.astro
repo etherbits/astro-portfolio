@@ -4,6 +4,7 @@ import { generateTranslator, getLangFromUrl } from "../i18n/utils";
 import { cn } from "../utils/tailwind";
 import Button from "./Button.astro";
 import JourneyCard, { type Journey } from "./JourneyCard.astro";
+import Link from "./Link.astro";
 interface Props {
   journeys: Journey[];
 }
@@ -51,8 +52,10 @@ const { props } = Astro;
     })
   }
   <div class="relative grid h-full grid-rows-[1fr_1fr] justify-center">
-    <a class="row-start-2 row-end-3 mt-8" href="/contact-me" rel="prefetch">
-      <Button>{t("journey.contact_button")}</Button>
-    </a>
+    <div class="row-start-2 row-end-3 mt-8" >
+      <Link href="/contact-me">
+        <Button>{t("journey.contact_button")}</Button>
+      </Link>
+    </div>
   </div>
 </ul>

@@ -3,6 +3,7 @@ import type { languages } from "../i18n/ui";
 import { generateTranslator, getLangFromUrl } from "../i18n/utils";
 import Button from "./Button.astro";
 import JourneyCard, { type Journey } from "./JourneyCard.astro";
+import Link from "./Link.astro";
 interface Props {
   journeys: Journey[];
 }
@@ -21,7 +22,7 @@ const { props } = Astro;
       </li>
     ))
   }
-  <a href="/contact-me" rel="prefetch">
+  <Link href="/contact-me">
     <Button>{t("journey.contact_button")}</Button>
-  </a>
+  </Link>
 </ul>

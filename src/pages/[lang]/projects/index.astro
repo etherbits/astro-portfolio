@@ -19,8 +19,8 @@ const projects = await getProjects(lang);
 
 <Layout title="projects">
   <OutlineText class="md:text-clamp-3xl">{t("projects.title")}</OutlineText>
-  <main class="flex flex-col items-center">
-    <ul class="my-9 flex flex-col items-center gap-24 md:my-[8vh] md:gap-[8vh]">
+  <main class="flex flex-col items-center my-[4vh]">
+    <ul class="my-9 flex flex-col items-center gap-28 md:my-[8vh] md:gap-[8vh]">
       {
         projects.map((project, i) => {
           return (

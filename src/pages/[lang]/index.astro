@@ -11,25 +11,25 @@ const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang!);
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Nika Qvrivishvili's Portfolio">
   <main
-    class="flex max-w-full flex-col items-center justify-center text-center mb-auto sm:mt-[3vh] md:mt-[7vh]"
+    class="flex max-w-full flex-col items-center justify-center text-center mb-auto  sm:mt-[3vh] md:mt-[7vh]"
   >
     <img
       src="https://github.com/etherbits.png?size=200"
       width={200}
       height={200}
       alt="profile"
-      class="mb-8 h-20 w-20 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
+      class="mb-8 h-24 w-24 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
     />
-    <p class="mb-4 text-[26px] text-slate-200 sm:text-clamp-3xl">
+    <p class="mb-4 text-2xl text-slate-200 sm:text-clamp-3xl">
       {t("home.greet_start")}
       <span class="text-blue-200">{t("home.greet_name")}</span>
       {t("home.greet_end")}
     </p>
     <OutlineText>{t("home.profession")}</OutlineText>
     <p
-      class="mb-16 mt-8 max-w-[320px] text-sm leading-9 text-slate-300
+      class="mb-16 mt-6 max-w-[320px] text-lg break-words hyphens-auto leading-9 text-slate-300
         sm:max-w-clamp-xs sm:text-clamp-xl sm:leading-clamp-xl"
     >
       {t("home.skill_paragraph")}

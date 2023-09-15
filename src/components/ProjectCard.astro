@@ -2,7 +2,6 @@
 import { cn } from "../utils/tailwind";
 import Button from "./Button.astro";
 import { getLangFromUrl, generateTranslator } from "../i18n/utils";
-import Link from "./Link.astro";
 
 type Props = {
   title: string;
@@ -24,7 +23,7 @@ const { props } = Astro;
 
 <section
   class={cn(
-    "flex w-full flex-col  md:flex-row md:items-center md:justify-center md:gap-[5vw] md:px-12",
+    "flex w-full flex-col gap-5 md:flex-row md:items-center md:justify-center md:gap-[5vw] md:px-12",
     { "md:flex-row-reverse": props.reverse },
   )}
 >
@@ -49,14 +48,14 @@ const { props } = Astro;
     />
   </div>
   <div class="flex flex-col md:basis-[clamp(24rem,44%,44rem)]">
-    <h2 class="mb-4 text-xl font-medium md:mb-8 md:text-clamp-xl">
+    <h2 class="mb-6 text-2xl font-medium md:mb-8 md:text-clamp-xl">
       {props.title}
     </h2>
-    <p class="mb-4 text-sm md:mb-8 md:text-clamp-rg md:leading-[160%]">
+    <p class="mb-6 text-base md:mb-8 md:text-clamp-rg md:leading-[160%]">
       {props.description}
     </p>
     <ul
-      class="mb-8 flex max-w-full flex-wrap gap-3 text-[0.75rem] text-slate-300 md:mb-10 md:text-clamp-xm"
+      class="mb-10 flex max-w-full flex-wrap gap-3 text-sm text-slate-300 md:mb-10 md:text-clamp-xm"
     >
       {
         props.tags.map((tag) => (

@@ -50,3 +50,14 @@ export async function getProjects(lang: keyof typeof ui) {
 
   return mergedProjects;
 }
+export async function getJourneys(lang: keyof typeof ui) {
+  const journeys = await getCollection("journeys", (journey) =>
+    journey.slug.startsWith(lang),
+  );
+
+  const journeyDataObjs = journeys
+    .map((journey) => journey.data)
+    .sort((a, b) => +a.date - +b.date);
+
+  return journeyDataObjs;
+}

@@ -27,7 +27,7 @@ export const ui = {
     "projects.demo_button": "View Demo",
     "projects.journey_button": "View My Journey",
     "journey.title": "Journey",
-    "journey.contact_button": "Contact Me",
+    "journey.contact_button": "Get In Touch",
     "contact.title": "Get In Touch",
     "contact.name_label": "Name",
     "contact.name_placeholder": "Andrew Smith",

@@ -5,6 +5,7 @@ import { generateTranslator, getLangFromUrl } from "../../i18n/utils";
 import type { TranslationKey } from "../../i18n/ui";
 import LanguageToggle from "./LanguageToggle.astro";
 import { cn } from "../../utils/tailwind";
+import Link from "../Link.astro";
 
 const pathname = Astro.url.pathname;
 
@@ -31,7 +32,7 @@ const t = generateTranslator(lang!);
               link.name) as TranslationKey;
             return (
               <li class="flex w-full">
-                <a
+                <Link
                   href={link.href}
                   class={cn(
                     "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
@@ -41,7 +42,7 @@ const t = generateTranslator(lang!);
                   )}
                 >
                   {t(navTranslationKey)}
-                </a>
+                </Link>
               </li>
             );
           })

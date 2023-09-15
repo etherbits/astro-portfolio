@@ -123,4 +123,5 @@ const t = generateTranslator(lang!);
   }
 
   attachAnimation();
+  document.addEventListener("astro:after-swap", attachAnimation);
 </script>

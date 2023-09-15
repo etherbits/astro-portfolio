@@ -1,0 +1,39 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import OutlineText from "../../../components/OutlineText.astro";
+import ProjectCard from "../../../components/ProjectCard.astro";
+import {
+  getLangFromUrl,
+  generateTranslator,
+  getProjects,
+} from "../../../i18n/utils";
+
+import { languages } from "../../../i18n/ui";
+import Button from "../../../components/Button.astro";
+import Link from "../../../components/Link.astro";
+const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
+const t = generateTranslator(lang);
+
+const projects = await getProjects(lang);
+---
+
+<Layout title="projects">
+  <OutlineText class="md:text-clamp-3xl">{t("projects.title")}</OutlineText>
+  <main class="flex flex-col items-center my-[4vh]">
+    <ul class="my-9 flex flex-col items-center gap-28 md:my-[8vh] md:gap-[8vh]">
+      {
+        projects.map((project, i) => {
+          return (
+            <li>
+              <ProjectCard {...project} reverse={i % 2 !== 0} />
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <Link href="/journey">
+      <Button>{t("projects.journey_button")}</Button>
+    </Link>
+  </main>
+</Layout>

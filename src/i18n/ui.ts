@@ -23,7 +23,7 @@ export const ui = {
                             seamless digital experiences.`,
     "home.nav_button": "View My Projects",
     "projects.title": "My Projects",
-    "projects.webpage_button": "View Webpage",
+    "projects.webpage_button": "View Website",
     "projects.demo_button": "View Demo",
     "projects.journey_button": "View My Journey",
     "journey.title": "Journey",

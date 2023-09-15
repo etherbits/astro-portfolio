@@ -5,9 +5,11 @@ import vercel from "@astrojs/vercel/serverless";
 
 // const {Sec}
 
+import prefetch from "@astrojs/prefetch";
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  integrations: [tailwind()],
-  adapter: vercel(),
+  integrations: [tailwind(), prefetch()],
+  adapter: vercel()
 });

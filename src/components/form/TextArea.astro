@@ -5,14 +5,10 @@ import InputWrapper, { type InputWrapperProps } from "./InputWrapper.astro";
 
 type Props = {} & InputWrapperProps & HTMLAttributes<"input">;
 
-const { label,  name, wrapperClass, ...rest } = Astro.props;
+const { label, name, wrapperClass, ...rest } = Astro.props;
 ---
 
-<InputWrapper
-  label={label}
-  name={name}
-  containerClassName={wrapperClass}
->
+<InputWrapper label={label} name={name} containerClassName={wrapperClass}>
   <textarea
     {...rest}
     name={name}

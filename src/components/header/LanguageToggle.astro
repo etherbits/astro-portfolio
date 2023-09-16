@@ -21,11 +21,12 @@ const url = generateUrl();
   title="Toggle Language Eng/Geo"
 >
   <img
-    src={"/images/eng.webp"}
+    src={currentLocale === "en" ? "/images/eng.webp" : "/images/geo.webp"}
     width={16}
     height={16}
     class="h-4 w-4"
     alt="language flag"
   />
-  <span>{currentLanguage}</span>
+  <span class="lg:hidden">{currentLocale}</span>
+  <span class="hidden lg:inline">{currentLanguage}</span>
 </a>

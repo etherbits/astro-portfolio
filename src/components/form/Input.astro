@@ -19,11 +19,7 @@ const {
 } = Astro.props;
 ---
 
-<InputWrapper
-  label={label}
-  name={name}
-  containerClassName={wrapperClass}
->
+<InputWrapper label={label} name={name} containerClassName={wrapperClass}>
   <div
     class={cn(
       "group flex  w-full items-center gap-4 overflow-hidden  rounded-[4px] border border-slate-500 bg-transparent px-4 py-3 focus-within:border-slate-300 md:gap-5 md:px-5",

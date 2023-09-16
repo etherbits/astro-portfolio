@@ -11,7 +11,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang!);
 ---
 
-<Layout title="Nika Qvrivishvili's Portfolio">
+<Layout title="Portfolio: Nika Qvrivishvili">
   <main
     class="flex max-w-full flex-col items-center justify-center text-center mb-auto sm:mt-[3vh] md:mt-[7vh]"
   >
@@ -20,7 +20,7 @@ const t = generateTranslator(lang!);
       width={200}
       height={200}
       alt="profile"
-      class="mb-8 h-24 w-24 sm:h-28 sm:w-28 md:h-40 md:w-40 rounded-full"
+      class="mb-8 h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-40 lg:w-40 rounded-full"
     />
     <p class="mb-4 text-2xl text-slate-200 sm:text-clamp-3xl">
       {t("home.greet_start")}
@@ -29,16 +29,16 @@ const t = generateTranslator(lang!);
     </p>
     <OutlineText>{t("home.profession")}</OutlineText>
     <p
-      class="mb-16 mt-6 max-w-[320px] text-lg break-none hyphens-auto leading-9 text-slate-300
-        sm:max-w-clamp-xs sm:text-clamp-xl sm:leading-clamp-xl"
+      class="mb-12 mt-6 max-w-[320px] text-lg break-none hyphens-auto leading-9 text-slate-300
+        sm:max-w-clamp-xs sm:text-clamp-lg"
     >
       {t("home.skill_paragraph")}
     </p>
-    <Link href="/projects" class="mb-11" rel="prefetch">
-      <Button class="text-base">{t("home.nav_button")}</Button>
+    <Link href="/projects" class="mb-11">
+      <Button >{t("home.nav_button")}</Button>
     </Link>
   </main>
-  <RectLinks size={48} />
+  <RectLinks  />
   <Waves
     type="homeRight"
     class="bottom-0 right-0 h-[37%] md:h-[70%] w-[72%] translate-x-[35%] translate-y-[12%] 2xl:h-[86%]"

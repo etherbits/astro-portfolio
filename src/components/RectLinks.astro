@@ -4,7 +4,6 @@ import { cn } from "../utils/tailwind";
 import Icon from "./Icon.astro";
 interface Props {
   class?: string;
-  size: number;
 }
 
 const { props } = Astro;
@@ -29,7 +28,7 @@ const linkObjs = [
 ];
 ---
 
-<ul class={cn("flex w-fit gap-6 sm:gap-11", props.class)}>
+<ul class={cn("flex w-fit gap-6 sm:gap-8", props.class)}>
   {
     linkObjs.map((link) => (
       <li>

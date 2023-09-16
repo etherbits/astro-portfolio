@@ -7,7 +7,7 @@ module.exports = {
     extend: {
       screens: {
         'tall': { 'raw': '(min-height: 860px)' },
-        'taller': { 'raw': '(min-height: 920px)' },
+        'taller': { 'raw': '(min-height: 980px)' },
       },
       lineHeight: {
         "clamp-xl": "clamp(2rem, 2.25vw, 3rem)",

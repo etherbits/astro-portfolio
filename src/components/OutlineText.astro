@@ -7,17 +7,17 @@ interface Props {
 const { props } = Astro;
 
 const baseClassName: string =
-  "text-3xl sm:text-clamp-5xl leading-normal bg-gradient-to-br font-extrabold [-webkit-text-stroke:2px_transparent] tracking-wider md:tracking-widest md:[-webkit-text-stroke:4px_transparent] from-blue-200  to-slate-600 bg-clip-text text-black";
+  "text-3xl sm:text-clamp-5xl leading-normal bg-gradient-to-br font-extrabold [-webkit-text-stroke:2px_transparent] tracking-wider md:tracking-widest md:[-webkit-text-stroke:3px_transparent] xl:[-webkit-text-stroke:4px_transparent] from-blue-200  to-slate-600 bg-clip-text text-black";
 ---
 
 <div class="relative w-full text-center select-none overflow-visible h-fit">
-  <p class={cn(baseClassName, props.class)}>
+  <h1 class={cn(baseClassName, props.class)}>
     <slot />
-  </p>
+  </h1>
   <p
     class={cn(
       baseClassName,
-      "absolute left-0 top-[6px] md:top-[12%] z-[-1] opacity-60 w-full h-full",
+      "absolute left-0 top-[6px] md:top-[11%] z-[-1] opacity-60 w-full h-full",
       props.class,
     )}
   >

@@ -13,28 +13,28 @@ const t = generateTranslator(lang!);
 
 <Layout title="Portfolio: Nika Qvrivishvili">
   <main
-    class="flex max-w-full flex-col items-center justify-center text-center mb-auto sm:mt-[3vh] md:mt-[7vh]"
+    class="flex max-w-full flex-col items-center justify-center text-center mb-auto tall:mt-[3vh] taller:mt-[7vh]"
   >
     <img
       src="https://github.com/etherbits.png?size=200"
       width={200}
       height={200}
       alt="profile"
-      class="mb-8 h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-40 lg:w-40 rounded-full"
+      class="mb-8 h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-36 lg:w-36 rounded-full"
     />
-    <p class="mb-4 text-2xl text-slate-200 sm:text-clamp-3xl">
+    <p class="mb-4 text-2xl text-slate-200 sm:text-clamp-4xl">
       {t("home.greet_start")}
       <span class="text-blue-200">{t("home.greet_name")}</span>
       {t("home.greet_end")}
     </p>
     <OutlineText>{t("home.profession")}</OutlineText>
     <p
-      class="mb-12 mt-6 max-w-[320px] text-lg break-none hyphens-auto leading-9 text-slate-300
+      class="mb-10 tall:mb-12 mt-6 max-w-[320px] text-lg break-none hyphens-auto sm:hyphens-none leading-9 text-slate-300
         sm:max-w-clamp-xs sm:text-clamp-lg"
     >
       {t("home.skill_paragraph")}
     </p>
-    <Link href="/projects" class="mb-11">
+    <Link href="/projects" class="mb-8 tall:mb-11">
       <Button >{t("home.nav_button")}</Button>
     </Link>
   </main>

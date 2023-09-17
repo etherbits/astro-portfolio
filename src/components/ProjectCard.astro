@@ -23,11 +23,11 @@ const { props } = Astro;
 
 <section
   class={cn(
-    "flex w-full flex-col gap-5 xl:flex-row md:items-center md:justify-center md:gap-[5vw] md:px-12",
+    "flex w-full flex-col gap-5 xl:flex-row md:items-start md:justify-center md:gap-[5vw] md:px-12",
     { "xl:flex-row-reverse": props.reverse },
   )}
 >
-  <div class="relative md:h-fit md:basis-[clamp(24rem,46%,46rem)]">
+  <div class="relative md:h-fit md:mt-[2%] md:basis-[clamp(24rem,46%,46rem)]">
     <img
       src={props.image}
       width={1022}

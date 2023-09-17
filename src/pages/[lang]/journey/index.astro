@@ -18,7 +18,7 @@ const journeys = await getJourneys(lang);
 
 <Layout title="journeys">
   <OutlineText>{t("journey.title")}</OutlineText>
-  <main class="py-[6vh]">
+  <main class="pt-[6vh]">
     <DesktopJourneyList journeys={journeys} />
     <MobileJourneyList journeys={journeys} />
   </main>

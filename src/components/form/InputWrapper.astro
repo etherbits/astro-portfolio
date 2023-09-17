@@ -12,11 +12,11 @@ const { props } = Astro;
 
 <div class="w-full">
   <label class={cn("flex w-full flex-col gap-3", props.wrapperClass)}>
-    <span class="md:text-lg">{props.label}</span>
+    <span class="sm:text-clamp-lg">{props.label}</span>
     <slot />
   </label>
   <p
-    class="text-sm text-red-500 empty:my-0 mt-3"
+    class="text-sm sm:text-clamp-sm text-red-500 empty:my-0 mt-3"
     id={`${props.name}-error`}
     error-message
   >

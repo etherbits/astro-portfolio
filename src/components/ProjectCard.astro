@@ -48,14 +48,14 @@ const { props } = Astro;
     />
   </div>
   <div class="flex px-5 flex-col md:basis-[clamp(24rem,44%,44rem)]">
-    <h2 class="mb-6 text-2xl font-medium md:mb-8 md:text-clamp-xl">
+    <h2 class="mb-6 text-2xl font-medium md:mb-8 md:text-clamp-xl text-slate-200">
       {props.title}
     </h2>
-    <p class="mb-6 text-base md:mb-8 md:text-clamp-rg md:leading-[160%]">
+    <p class="mb-6 text-base md:mb-8 sm:text-clamp-base text-slate-300">
       {props.description}
     </p>
     <ul
-      class="mb-10 flex max-w-full flex-wrap gap-3 text-sm text-slate-300 md:mb-10 md:text-clamp-xm"
+      class="mb-10 flex max-w-full flex-wrap gap-3 text-slate-300 md:mb-10 text-clamp-sm"
     >
       {
         props.tags.map((tag) => (
@@ -68,7 +68,7 @@ const { props } = Astro;
     <div class="flex flex-col">
       {
         props.disclamer && (
-          <p class="mb-6 text-right text-sm text-slate-400">
+          <p class="mb-6 text-right text-sm sm:text-clamp-sm text-slate-400">
             {props.disclamer}
           </p>
         )

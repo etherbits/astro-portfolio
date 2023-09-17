@@ -18,13 +18,13 @@ const t = generateTranslator(lang);
     <div>
       <OutlineText>{t("contact.title")}</OutlineText>
     </div>
-    <main class="py-[4vh] px-[4vw] md:w-[720px] md:py-16">
+    <main class="py-[4vh] px-[4vw] md:max-w-clamp-form md:py-16">
       <form
         method="POST"
-        class="mb-11 flex w-full flex-col items-end gap-6"
+        class="mb-11 flex w-full flex-col items-end md:gap-10"
         contact-form
       >
-        <div class="flex w-full flex-col gap-6 md:flex-row md:gap-8">
+        <div class="flex w-full flex-col gap-6 md:flex-row md:gap-10">
           <Input
             icon="User"
             class="w-full"
@@ -50,22 +50,22 @@ const t = generateTranslator(lang);
           placeholder={t("contact.message_placeholder")}
           required
         />
-        <Button type="submit" class="mt-2">{t("contact.send_button")}</Button>
+        <Button type="submit" class="mt-2 md:mt-3">{t("contact.send_button")}</Button>
         <p
           id="status-message"
           class="text-sm text-slate-400 md:text-base empty:mt-0 mt-3"
         >
         </p>
       </form>
-      <section class="flex w-fit flex-col items-start gap-4">
-        <h2>{t("contact.contact_info_title")}</h2>
-        <ul class="mb-3 flex flex-col gap-4 text-base">
-          <li class="flex items-center gap-3">
-            <Icon icon="Mail" class="stroke-slate-400 w-5 h-5" />
+      <section class="flex w-fit flex-col items-start gap-4 md:gap-5">
+        <h2 class="sm:text-clamp-lg">{t("contact.contact_info_title")}</h2>
+        <ul class="mb-3 md:mb-4 flex flex-col gap-4 text-base sm:text-clamp-base">
+          <li class="flex items-center gap-4">
+            <Icon icon="Mail" class="stroke-slate-400 w-5 h-5 md:w-6 md:h-6" />
             <span class="break-all">nika.qvrivishviliwork@gmail.com</span>
           </li>
         </ul>
-        <RectLinks size={36} />
+        <RectLinks />
       </section>
     </main>
   </div>

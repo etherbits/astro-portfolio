@@ -11,7 +11,20 @@ import {
 import { languages } from "../../../i18n/ui";
 import Button from "../../../components/Button.astro";
 import Link from "../../../components/Link.astro";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    const obj = {
+      params: {
+        lang: lang,
+      },
+    };
+    return obj;
+  });
+}
+
 const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
+
 const t = generateTranslator(lang);
 
 const projects = await getProjects(lang);

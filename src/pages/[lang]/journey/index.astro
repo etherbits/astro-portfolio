@@ -11,6 +11,17 @@ import { languages } from "../../../i18n/ui";
 import MobileJourneyList from "../../../components/MobileJourneyList.astro";
 import DesktopJourneyList from "../../../components/DesktopJourneyList.astro";
 
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    const obj = {
+      params: {
+        lang: lang,
+      },
+    };
+    return obj;
+  });
+}
+
 const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
 const t = generateTranslator(lang);
 const journeys = await getJourneys(lang);

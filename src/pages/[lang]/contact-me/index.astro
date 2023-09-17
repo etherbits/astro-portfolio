@@ -9,6 +9,18 @@ import RectLinks from "../../../components/RectLinks.astro";
 import Icon from "../../../components/Icon.astro";
 import Input from "../../../components/form/Input.astro";
 import TextArea from "../../../components/form/TextArea.astro";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    const obj = {
+      params: {
+        lang: lang,
+      },
+    };
+    return obj;
+  });
+}
+
 const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
 const t = generateTranslator(lang);
 ---

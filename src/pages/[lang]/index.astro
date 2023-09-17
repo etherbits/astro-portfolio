@@ -6,6 +6,18 @@ import RectLinks from "../../components/RectLinks.astro";
 import Waves from "../../components/Waves.astro";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import Link from "../../components/Link.astro";
+import { languages } from "../../i18n/ui";
+
+export function getStaticPaths() {
+  return Object.keys(languages).map((lang) => {
+    const obj = {
+      params: {
+        lang: lang,
+      },
+    };
+    return obj;
+  });
+}
 
 const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang!);
@@ -35,10 +47,10 @@ const t = generateTranslator(lang!);
       {t("home.skill_paragraph")}
     </p>
     <Link href="/projects" class="mb-11">
-      <Button >{t("home.nav_button")}</Button>
+      <Button>{t("home.nav_button")}</Button>
     </Link>
   </main>
-  <RectLinks  />
+  <RectLinks />
   <Waves
     type="homeRight"
     class="bottom-0 right-0 h-[37%] md:h-[70%] w-[72%] translate-x-[35%] translate-y-[12%] 2xl:h-[86%]"

@@ -16,7 +16,7 @@ const { props } = Astro;
 ---
 
 <ul
-  class="mb-14 mt-[4vh] grid w-[100%] items-center gap-0 [grid-auto-rows:1fr]"
+  class="mb-14 mt-[4vh] xl:max-w-clamp-journey mx-auto hidden xl:grid items-center gap-0 [grid-auto-rows:1fr]"
 >
   {
     props.journeys.map((journey, i) => {

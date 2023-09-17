@@ -21,13 +21,12 @@ module.exports = {
         "clamp-2xl": ["clamp(1.5rem, 1.428rem + 0.36vw, 1.86rem)", "1.2"],
         "clamp-3xl": ["clamp(1.875rem, 1.762rem + 0.565vw, 2.44rem)", "1.2"],
         "clamp-4xl": ["clamp(2.25rem, 2.14rem + 0.55vw, 2.8rem)", "1.2"],
-        "clamp-5xl": ["clamp(3rem, 2.82rem + 0.9vw, 3.9rem)", "1.2"],
+        "clamp-5xl": ["clamp(3rem, 2.82rem + 0.9vw, 3.9rem)", "1.6"],
       },
       maxWidth: {
         "clamp-xs": "clamp(28rem, 50vw, 38rem)",
         "clamp-form": "clamp(10rem, 100vw, 100rem)",
-        "clamp-2xl": "clamp(30rem, 48vw, 48rem)",
-        "clamp-card": "clamp(24rem, 35vw, 44rem)",
+        "clamp-journey": "clamp(10rem, 100vw, 100rem)",
       },
       width: {
         "clamp-card-container": "clamp(44rem, 84%, 84rem)",

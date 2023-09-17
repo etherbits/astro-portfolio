@@ -19,9 +19,7 @@ const journeys = await getJourneys(lang);
 <Layout title="journeys">
   <OutlineText>{t("journey.title")}</OutlineText>
   <main class="py-[6vh]">
-    <div class="hidden md:block">
-      <DesktopJourneyList journeys={journeys} />
-    </div>
+    <DesktopJourneyList journeys={journeys} />
     <MobileJourneyList journeys={journeys} />
   </main>
 </Layout>

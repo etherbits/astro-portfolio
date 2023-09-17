@@ -12,7 +12,7 @@ const { props } = Astro;
 
 <div class="w-full">
   <label class={cn("flex w-full flex-col gap-3 md:gap-4", props.wrapperClass)}>
-    <span class="sm:text-clamp-lg">{props.label}</span>
+    <span class="sm:text-clamp-base">{props.label}</span>
     <slot />
   </label>
   <p

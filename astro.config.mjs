@@ -10,5 +10,11 @@ export default defineConfig({
   output: "hybrid",
   site: "https://nikaa.online",
   integrations: [tailwind(), prefetch(), sitemap()],
+  redirects: {
+    '/': '/en',
+    '/projects': '/en/projects',
+    '/journey': '/en/journey',
+    '/contact-me': '/en/contact-me',
+  },
   adapter: vercel()
 });

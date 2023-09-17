@@ -7,6 +7,7 @@ import Waves from "../../components/Waves.astro";
 import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import Link from "../../components/Link.astro";
 import { languages } from "../../i18n/ui";
+import { Image } from "astro:assets";
 
 export function getStaticPaths() {
   return Object.keys(languages).map((lang) => {
@@ -27,7 +28,7 @@ const t = generateTranslator(lang!);
   <main
     class="flex max-w-full flex-col items-center justify-center text-center mb-auto tall:mt-[3vh] taller:mt-[7vh]"
   >
-    <img
+    <Image
       src="https://github.com/etherbits.png?size=200"
       width={200}
       height={200}

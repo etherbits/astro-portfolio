@@ -1,8 +1,12 @@
 import { z } from "astro:content";
+import UnispaceImg from '../assets/images/unispace-laptop.webp'
+import SandroImg from '../assets/images/sandro-laptop.webp'
+import EBaseImg from '../assets/images/ebase-laptop.webp'
+import OctopusImg from '../assets/images/octopus-laptop.webp'
 
 export const commonDataSchema = z.object({
   title: z.string().min(1).max(128),
-  image: z.string().min(1).max(128),
+  image: z.object({}),
   repoLink: z.string().url(),
   websiteLink: z.string().url().optional(),
   demoLink: z.string().url().optional(),
@@ -20,7 +24,7 @@ export const commonDataObjectSchema = z.object({
 export const commonData = {
   unispace: {
     title: "UniSpace",
-    image: "/images/unispace-laptop.webp",
+    image: UnispaceImg,
     repoLink: "https://github.com/etherbits/Unilab-Internal-System",
     websiteLink: "https://tiny-pegasus-d8c812.netlify.app",
     tags: [
@@ -35,7 +39,7 @@ export const commonData = {
   },
   sandro: {
     title: "Sandro's books",
-    image: "/images/sandro-laptop.webp",
+    image: SandroImg,
     repoLink: "https://github.com/etherbits/react-Web-edition-of-Sandro-s-book",
     websiteLink: "https://quiet-brioche-e9ce8b.netlify.app/",
     tags: ["React", "Javascript", "SASS", "Framer Motion", "React Router"],
@@ -43,7 +47,7 @@ export const commonData = {
   },
   ebase: {
     title: "EBase",
-    image: "/images/ebase-laptop.webp",
+    image: EBaseImg,
     repoLink: "https://github.com/etherbits/ebase",
     demoLink: "https://www.youtube.com/watch?v=yp5Uso8klBg",
     tags: ["React", "Typescript", "NextJS", "SASS", "PostgreSQL", "Prisma"],
@@ -51,7 +55,7 @@ export const commonData = {
   },
   octopus: {
     title: "Octopus",
-    image: "/images/octopus-laptop.webp",
+    image: OctopusImg,
     repoLink: "https://github.com/etherbits/octopus",
     tags: ["Tauri", "React", "Typescript", "Zustand", "Tailwind", "Rust"],
     order: 3,

@@ -2,6 +2,10 @@
 import { Image } from "astro:assets";
 import { cn } from "../utils/tailwind";
 import Icon from "./Icon.astro";
+import GithubImg from "../assets/images/github.webp";
+import TwitterImg from "../assets/images/twitter.webp";
+import LinkedinImg from "../assets/images/linkedin.webp";
+
 interface Props {
   class?: string;
 }
@@ -11,17 +15,17 @@ const { props } = Astro;
 const linkObjs = [
   { vectorName: "Newspaper", imgType: "vector", url: "#" },
   {
-    imageSrc: "/images/github.webp",
+    imageSrc: GithubImg,
     imgType: "image",
     url: "https://github.com/etherbits",
   },
   {
-    imageSrc: "/images/twitter.webp",
+    imageSrc: TwitterImg,
     imgType: "image",
     url: "https://twitter.com/etherbito",
   },
   {
-    imageSrc: "/images/linkedin.webp",
+    imageSrc: LinkedinImg,
     imgType: "image",
     url: "https://www.linkedin.com/in/nika-qvrivishvili-126664203",
   },

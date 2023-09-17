@@ -1,5 +1,8 @@
 ---
 import { languages } from "../../i18n/ui";
+import EngImg from "../../assets/images/eng.webp";
+import GeoImg from "../../assets/images/geo.webp";
+import { Image } from "astro:assets";
 
 const splitPathname = Astro.url.pathname.split("/");
 const currentLocale = splitPathname[1] as keyof typeof languages;
@@ -20,8 +23,8 @@ const url = generateUrl();
   class="flex items-center gap-4 rounded-md px-4 py-2 cursor-pointer hover:bg-neutral-800 transition-[all] [transition-duration:250ms]"
   title="Toggle Language Eng/Geo"
 >
-  <img
-    src={currentLocale === "en" ? "/images/eng.webp" : "/images/geo.webp"}
+  <Image
+    src={currentLocale === "en" ? EngImg : GeoImg}
     width={16}
     height={16}
     class="h-4 w-4"

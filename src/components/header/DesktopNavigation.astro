@@ -20,6 +20,9 @@ const t = generateTranslator(lang!);
         const navTranslationKey = ("navigation." + link.name) as TranslationKey;
         return (
           <li>
+          {path}
+          {lang}
+          {link.href}
             <Link
               href={link.href}
               class={cn({ "text-slate-300": path === `/${lang}${link.href}` })}

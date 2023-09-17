@@ -13,7 +13,7 @@ const lang = getLangFromUrl(Astro.url) as keyof typeof languages;
 const t = generateTranslator(lang);
 ---
 
-<Layout title="contact-me">
+<Layout title="Contact Me: Nika Qvrivishvili">
   <div class="flex w-full md:w-auto flex-col md:items-center">
     <div>
       <OutlineText>{t("contact.title")}</OutlineText>
@@ -50,7 +50,9 @@ const t = generateTranslator(lang);
           placeholder={t("contact.message_placeholder")}
           required
         />
-        <Button type="submit" class=" md:mt-2">{t("contact.send_button")}</Button>
+        <Button type="submit" class="md:mt-2">
+          {t("contact.send_button")}
+        </Button>
         <p
           id="status-message"
           class="text-sm text-slate-400 md:text-base empty:mt-0 mt-3"
@@ -59,7 +61,9 @@ const t = generateTranslator(lang);
       </form>
       <section class="flex w-fit flex-col items-start gap-4 md:gap-5">
         <h2 class="sm:text-clamp-lg">{t("contact.contact_info_title")}</h2>
-        <ul class="mb-3 md:mb-4 flex flex-col gap-4 text-base sm:text-clamp-base">
+        <ul
+          class="mb-3 md:mb-4 flex flex-col gap-4 text-base sm:text-clamp-base"
+        >
           <li class="flex items-center gap-4">
             <Icon icon="Mail" class="stroke-slate-400 w-5 h-5 md:w-6 md:h-6" />
             <span class="break-all">nika.qvrivishviliwork@gmail.com</span>

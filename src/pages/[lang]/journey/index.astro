@@ -16,7 +16,7 @@ const t = generateTranslator(lang);
 const journeys = await getJourneys(lang);
 ---
 
-<Layout title="journeys">
+<Layout title="Journeys: Nika Qvrivishvili">
   <OutlineText>{t("journey.title")}</OutlineText>
   <main class="pt-[6vh]">
     <DesktopJourneyList journeys={journeys} />

@@ -1,7 +1,5 @@
-import { Resend } from "resend";
 import type { ContactMeFormData } from "../schemas/contactMe";
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
 export type EmailData = {
   from: string;
   to: string;
@@ -24,7 +22,18 @@ export async function sendContactMail(data: ContactMeFormData) {
 }
 
 async function sendMail(data: EmailData) {
-  const res = await resend.emails.send(data);
+  const res = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${import.meta.env.RESEND_API_KEY}`,
+    },
+    body: JSON.stringify(data),
+  });
 
-  return res;
+  if (!res.ok) {
+    return false
+  }
+
+  return true
 }

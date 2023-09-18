@@ -7,7 +7,7 @@ import LanguageToggle from "./LanguageToggle.astro";
 import { cn } from "../../utils/tailwind";
 import Link from "../Link.astro";
 
-const pathname = Astro.url.pathname;
+const path = Astro.url.pathname;
 
 const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang!);
@@ -37,7 +37,9 @@ const t = generateTranslator(lang!);
                   class={cn(
                     "w-full rounded-md px-4 py-2 bg-neutral-900/0 hover:bg-neutral-800/60",
                     {
-                      "bg-neutral-900/60": pathname === `/${lang}${link.href}`,
+                      "bg-neutral-900/60":
+                        path === `/${lang}${link.href}` ||
+                        path === `/${lang}${link.href}/`,
                     },
                   )}
                 >

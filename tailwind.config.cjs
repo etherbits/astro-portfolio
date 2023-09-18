@@ -39,7 +39,7 @@ module.exports = {
         ],
       },
       animation: {
-        'appear': "appear 0.75s ease-out"
+        'appear': "appear 0.5s ease-out"
       },
       keyframes: {
         appear: {

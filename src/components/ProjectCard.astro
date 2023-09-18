@@ -25,12 +25,17 @@ const { props } = Astro;
 ---
 
 <section
+  id={props.title}
   class={cn(
     "flex w-full flex-col gap-5 xl:flex-row md:items-start md:justify-center md:gap-[5vw] md:px-12",
     { "xl:flex-row-reverse": props.reverse },
   )}
+  project-card
 >
-  <div class="relative md:h-fit md:mt-[2%] md:basis-[clamp(24rem,46%,46rem)]">
+  <div
+    class="relative md:h-fit md:mt-[2%] md:basis-[clamp(24rem,46%,46rem)] opacity-0"
+    project-image
+  >
     <Image
       src={props.image}
       width={1022}
@@ -52,11 +57,15 @@ const { props } = Astro;
   </div>
   <div class="flex px-5 flex-col md:basis-[clamp(24rem,44%,44rem)]">
     <h2
-      class="mb-6 text-2xl font-medium md:mb-8 md:text-clamp-xl text-slate-200"
+      class="mb-6 text-2xl font-medium md:mb-8 md:text-clamp-xl text-slate-200 opacity-0"
+      project-title
     >
       {props.title}
     </h2>
-    <p class="mb-6 text-base md:mb-8 sm:text-clamp-base text-slate-300">
+    <p
+      class="mb-6 text-base md:mb-8 sm:text-clamp-base text-slate-300 opacity-0"
+      project-description
+    >
       {props.description}
     </p>
     <ul
@@ -64,13 +73,16 @@ const { props } = Astro;
     >
       {
         props.tags.map((tag) => (
-          <li class="border-1 rounded-[4px] border border-slate-400 px-2 py-1">
+          <li
+            class="border-1 rounded-[4px] border border-slate-400 px-2 py-1 opacity-0"
+            project-tag
+          >
             {tag}
           </li>
         ))
       }
     </ul>
-    <div class="flex flex-col">
+    <div class="flex flex-col opacity-0" project-actions>
       {
         props.disclamer && (
           <p class="mb-6 text-right text-sm sm:text-clamp-sm text-slate-400">
@@ -126,3 +138,81 @@ const { props } = Astro;
     </div>
   </div>
 </section>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  function attachIntersectionAnimations() {
+    const projectCards = document.querySelectorAll("[project-card]");
+    const animatedElements: Element[] = [];
+    const animationCallbacks: (() => void)[] = [];
+    let didStartAnimation = false;
+    const options = {
+      root: null,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        if (animatedElements.some((el) => el.id === entry.target.id)) {
+          return;
+        }
+        animatedElements.push(entry.target);
+
+        const image = entry.target.querySelector("[project-image]");
+        const title = entry.target.querySelector("[project-title]");
+        const description = entry.target.querySelector("[project-description]");
+        const tags = entry.target.querySelectorAll("[project-tag]");
+        const actions = entry.target.querySelector("[project-actions]");
+
+        animationCallbacks.push(() => {
+          const tl = anime.timeline({
+            complete: () => {
+              const animation = animationCallbacks.shift();
+              if (!animation) {
+                didStartAnimation = false;
+                return;
+              }
+              animation();
+            },
+          });
+
+          tl.add({
+            targets: [image, title, description],
+            opacity: 1,
+            easing: "linear",
+            duration: 350,
+          })
+            .add({
+              targets: tags,
+              opacity: 1,
+              easing: "linear",
+              duration: 150,
+              delay: anime.stagger(50),
+            })
+            .add({
+              targets: actions,
+              opacity: 1,
+              easing: "linear",
+              duration: 250,
+            });
+        });
+
+        if (!didStartAnimation) {
+          didStartAnimation = true;
+          animationCallbacks.shift()!();
+        }
+      });
+    }, options);
+
+    projectCards.forEach((card) => {
+      observer.observe(card);
+    });
+  }
+
+  attachIntersectionAnimations();
+  document.addEventListener("astro:after-swap", attachIntersectionAnimations);
+</script>

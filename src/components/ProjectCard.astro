@@ -183,20 +183,20 @@ const { props } = Astro;
           tl.add({
             targets: [image, title, description],
             opacity: 1,
-            easing: "linear",
+            easing: "easeOutQuad",
             duration: 350,
           })
             .add({
               targets: tags,
               opacity: 1,
-              easing: "linear",
+              easing: "easeOutQuad",
               duration: 150,
               delay: anime.stagger(50),
             })
             .add({
               targets: actions,
               opacity: 1,
-              easing: "linear",
+              easing: "easeOutQuad",
               duration: 250,
             });
         });

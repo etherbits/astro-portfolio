@@ -17,6 +17,7 @@ const t = generateTranslator(lang!);
   <button
     class={"rounded-md p-3  backdrop-blur-md bg-neutral-950/60 hover:bg-neutral-900/60"}
     title="toggle burger menu"
+    transition:animate="initial"
   >
     <Icon icon="Menu" class="stroke-slate-300" />
   </button>
@@ -61,6 +62,8 @@ const t = generateTranslator(lang!);
 
 <script>
   import anime from "animejs/lib/anime.es";
+
+  anime({ targets: "[burger-container]", opacity: [0, 1] });
 
   function attachAnimation() {
     const container = document.querySelector(

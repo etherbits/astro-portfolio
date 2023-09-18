@@ -72,11 +72,21 @@ const { title } = Astro.props;
       }
 
       ::-webkit-scrollbar-thumb {
+        transition: 150ms;
         background: rgb(71, 85, 105);
         background: linear-gradient(
           180deg,
           rgba(71, 85, 105, 1) 0%,
           rgba(55, 65, 81, 1) 100%
+        );
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgb(100, 116, 139);
+        background: linear-gradient(
+          180deg,
+          rgba(100, 116, 139, 1) 0%,
+          rgba(75, 85, 99, 1) 100%
         );
       }
     </style>

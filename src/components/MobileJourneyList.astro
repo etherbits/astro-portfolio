@@ -71,12 +71,14 @@ const { props } = Astro;
           });
 
           const card = entry.target.querySelector("[journey-card]");
+          const isReversed = card?.getAttribute('is-reversed')
 
           tl.add({
             targets: card,
             opacity: 1,
+            translateX: isReversed ? ["1rem", 0] : ["-1rem", 0],
             easing: "linear",
-            duration: 350,
+            duration: 250,
           });
         });
 

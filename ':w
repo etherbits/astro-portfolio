@@ -68,15 +68,20 @@ const { title } = Astro.props;
       }
 
       body::-webkit-scrollbar-track {
-        background: #0a0a0a;
+        background: rgb(17, 24, 39);
+        background: linear-gradient(
+          180deg,
+          rgba(17, 24, 39, 1) 0%,
+          rgba(10, 10, 10, 1) 100%
+        );
       }
 
       body::-webkit-scrollbar-thumb {
-        background: rgb(71, 85, 105);
+        background: rgb(31, 41, 55);
         background: linear-gradient(
           180deg,
-          rgba(71, 85, 105, 1) 0%,
-          rgba(55, 65, 81, 1) 100%
+          rgba(31, 41, 55, 1) 0%,
+          rgba(10, 10, 10, 1) 100%
         );
       }
     </style>

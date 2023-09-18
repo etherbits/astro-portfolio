@@ -10,10 +10,10 @@ export default defineConfig({
   site: "https://nikaa.online",
   integrations: [tailwind(), prefetch(), sitemap()],
   redirects: {
-    '/': '/en',
-    '/projects': '/en/projects',
-    '/journey': '/en/journey',
-    '/contact-me': '/en/contact-me'
+    "/": "/en",
+    "/projects": "/en/projects",
+    "/journey": "/en/journey",
+    "/contact-me": "/en/contact-me",
   },
-  adapter: vercel()
+  adapter: vercel(),
 });

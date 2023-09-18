@@ -44,7 +44,7 @@ import { fade } from "astro:transitions";
     anime({
       targets: items,
       opacity: [0, 1],
-      easing: "linear",
+      easing: "easeOutQuad",
       duration: 250,
       delay: anime.stagger(150),
     });

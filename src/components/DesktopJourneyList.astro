@@ -107,20 +107,20 @@ const { props } = Astro;
           scale: [0.5, 1],
           translateX: ["-50%", "-50%"],
           translateY: ["-50%", "-50%"],
-          easing: "linear",
+          easing: "easeOutQuad",
           duration: 250,
         })
           .add({
             targets: card,
             opacity: 1,
             translateX: isReversed ? "1rem" : "-1rem",
-            easing: "linear",
+            easing: "easeOutQuad",
             duration: 250,
           })
           .add({
             targets: path,
             opacity: 1,
-            easing: "linear",
+            easing: "easeOutQuad",
             duration: 150,
             delay: anime.stagger(50),
           });
@@ -145,7 +145,7 @@ const { props } = Astro;
         tl.add({
           targets: button,
           opacity: 1,
-          easing: "linear",
+          easing: "easeOutQuad",
           duration: 350,
         });
       });

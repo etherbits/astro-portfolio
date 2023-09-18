@@ -11,19 +11,44 @@ import { fade } from "astro:transitions";
 >
   <div
     class="absolute z-[-1] h-full w-full bg-gradient-to-br from-[#000000ff] to-[#00000044] backdrop-blur-lg content-['']"
-    transition:animate={fade({ duration: "0.25s" })}
+    transition:animate="fade"
   >
   </div>
   <Link
+  id="logo"
     href="/"
     class="w-20% mr-6 w-fit whitespace-nowrap bg-gradient-to-br from-blue-200 to-slate-900 bg-clip-text text-center text-[24px] font-extrabold tracking-widest text-black"
     style={{ WebkitTextStroke: "2px transparent" }}
+    transition:animate="initial"
+    header-el-group
   >
     NQ
   </Link>
   <ResponsiveNavigation />
 
-  <div class="ml-auto hidden md:block">
+  <div
+    class="ml-auto hidden md:block"
+    transition:animate="fade"
+    header-el-group
+  >
     <LanguageToggle />
   </div>
 </header>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  function animateHeaderGroup() {
+    const items = document.querySelectorAll("[header-el-group]");
+
+    anime({
+      targets: items,
+      opacity: [0, 1],
+      easing: "linear",
+      duration: 250,
+      delay: anime.stagger(150),
+    });
+  }
+
+  animateHeaderGroup();
+</script>

@@ -12,9 +12,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang!);
 ---
 
-<nav class="hidden md:block"
-  transition:animate={fade({ duration: "0.25s" })}
- >
+<nav class="hidden md:block" transition:animate="fade">
   <ul
     class="flex items-center gap-6 whitespace-nowrap text-slate-400 md:text-clamp-lg lg:gap-8"
   >
@@ -22,7 +20,7 @@ const t = generateTranslator(lang!);
       navigationLinks.map((link) => {
         const navTranslationKey = ("navigation." + link.name) as TranslationKey;
         return (
-          <li nav-item>
+          <li header-el-group>
             <Link
               href={link.href}
               class={cn({
@@ -39,21 +37,3 @@ const t = generateTranslator(lang!);
     }
   </ul>
 </nav>
-
-<script>
-  import anime from "animejs/lib/anime.es";
-
-  function animateNav() {
-    const items = document.querySelectorAll("[nav-item]");
-
-    anime({
-      targets: items,
-      opacity: [0, 1],
-      easing: "linear",
-      duration: 500,
-      delay: anime.stagger(250),
-    });
-  }
-
-  animateNav();
-</script>

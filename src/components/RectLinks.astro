@@ -35,7 +35,7 @@ const linkObjs = [
 <ul class={cn("flex w-fit gap-6 sm:gap-8", props.class)}>
   {
     linkObjs.map((link) => (
-      <li>
+      <li rect-links>
         <a
           href={link.url}
           class={cn(
@@ -63,3 +63,21 @@ const linkObjs = [
     ))
   }
 </ul>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  function animateHeaderGroup() {
+    const items = document.querySelectorAll("[rect-links]");
+
+    anime({
+      targets: items,
+      opacity: [0, 1],
+      easing: "linear",
+      duration: 250,
+      delay: anime.stagger(150),
+    });
+  }
+
+  animateHeaderGroup();
+</script>

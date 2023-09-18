@@ -43,7 +43,7 @@ module.exports = {
       },
       keyframes: {
         appear: {
-          "0%": { opacity: 0 },
+          "0%": { opacity: 0.1 },
           "100%": { opacity: 1 },
         },
       },

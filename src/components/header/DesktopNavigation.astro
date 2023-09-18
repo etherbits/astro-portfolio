@@ -4,6 +4,7 @@ import { getLangFromUrl, generateTranslator } from "../../i18n/utils";
 import type { TranslationKey } from "../../i18n/ui";
 import { navigationLinks } from "./ResponsiveNavigation.astro";
 import Link from "../Link.astro";
+import { fade } from "astro/transitions";
 
 const path = Astro.url.pathname;
 
@@ -11,7 +12,9 @@ const lang = getLangFromUrl(Astro.url);
 const t = generateTranslator(lang!);
 ---
 
-<nav class="hidden md:block">
+<nav class="hidden md:block"
+  transition:animate={fade({ duration: "0.25s" })}
+ >
   <ul
     class="flex items-center gap-6 whitespace-nowrap text-slate-400 md:text-clamp-lg lg:gap-8"
   >
@@ -19,7 +22,7 @@ const t = generateTranslator(lang!);
       navigationLinks.map((link) => {
         const navTranslationKey = ("navigation." + link.name) as TranslationKey;
         return (
-          <li>
+          <li nav-item>
             <Link
               href={link.href}
               class={cn({
@@ -36,3 +39,21 @@ const t = generateTranslator(lang!);
     }
   </ul>
 </nav>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  function animateNav() {
+    const items = document.querySelectorAll("[nav-item]");
+
+    anime({
+      targets: items,
+      opacity: [0, 1],
+      easing: "linear",
+      duration: 500,
+      delay: anime.stagger(250),
+    });
+  }
+
+  animateNav();
+</script>

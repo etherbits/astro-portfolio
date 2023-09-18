@@ -38,6 +38,15 @@ module.exports = {
           ...defaultTheme.fontFamily.sans,
         ],
       },
+      animation: {
+        'appear': "appear 0.75s ease-out"
+      },
+      keyframes: {
+        appear: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        }
+      }
     },
   },
   plugins: [],

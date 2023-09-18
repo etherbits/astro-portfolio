@@ -17,16 +17,24 @@ const { props } = Astro;
 
 <section
   class={cn(
-    "my-auto flex h-fit w-full flex-col break-words hyphens-auto rounded-xl bg-gradient-to-r px-6 py-5 backdrop-blur-md from-neutral-900/30 to-gray-600/20",
+    "my-auto flex h-fit w-full flex-col break-words hyphens-auto rounded-xl bg-gradient-to-r px-6 py-5 backdrop-blur-md from-neutral-900/30 to-gray-600/20 opacity-0",
     { "bg-gradient-to-r": !props.reverse },
     { "bg-gradient-to-l": props.reverse },
   )}
+  journey-card
+  is-reversed={props.reverse}
 >
   <div class="mb-4 flex items-center flex-wrap justify-between gap-2">
-    <h2 class="text-lg sm:text-clamp-lg break-words hyphens-auto text-slate-200">
+    <h2
+      class="text-lg sm:text-clamp-lg break-words hyphens-auto text-slate-200"
+    >
       {props.journey.title}
     </h2>
-    <span class="text-sm sm:text-clamp-sm text-slate-400">{props.journey.date}</span>
+    <span class="text-sm sm:text-clamp-sm text-slate-400"
+      >{props.journey.date}</span
+    >
   </div>
-  <p class="text-base sm:text-clamp-base text-slate-300">{props.journey.content}</p>
+  <p class="text-base sm:text-clamp-base text-slate-300">
+    {props.journey.content}
+  </p>
 </section>

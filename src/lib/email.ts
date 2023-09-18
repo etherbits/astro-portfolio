@@ -22,18 +22,18 @@ export async function sendContactMail(data: ContactMeFormData) {
 }
 
 async function sendMail(data: EmailData) {
-  const res = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${import.meta.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${import.meta.env.RESEND_API_KEY}`,
     },
     body: JSON.stringify(data),
   });
 
   if (!res.ok) {
-    return false
+    return false;
   }
 
-  return true
+  return true;
 }

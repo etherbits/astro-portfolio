@@ -14,11 +14,14 @@ const t = generateTranslator(lang);
 const { props } = Astro;
 ---
 
-<div class="flex flex-col items-center xl:hidden px-[2vw] w-full gap-12">
+<div
+  class="flex flex-col items-center xl:hidden px-[2vw] w-full gap-12"
+  id="mobile-journeys"
+>
   <ul class="flex w-[100%] flex-col items-center gap-10">
     {
       props.journeys.map((journey, i) => (
-        <li>
+        <li id={journey.title} journey-item>
           <JourneyCard journey={journey} reverse={i % 2 !== 0} />
         </li>
       ))
@@ -28,3 +31,67 @@ const { props } = Astro;
     <Button>{t("journey.contact_button")}</Button>
   </Link>
 </div>
+
+<script>
+  import anime from "animejs/lib/anime.es";
+
+  function attachIntersectionAnimations() {
+    const journeyCards = document.querySelectorAll(
+      "#mobile-journeys [journey-item]",
+    );
+
+    const animatedElements: Element[] = [];
+    const animationCallbacks: (() => void)[] = [];
+    let didStartAnimation = false;
+    const options = {
+      root: null,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        if (animatedElements.some((el) => el.id === entry.target.id)) {
+          return;
+        }
+        animatedElements.push(entry.target);
+
+        animationCallbacks.push(() => {
+          const tl = anime.timeline({
+            complete: () => {
+              const animation = animationCallbacks.shift();
+              if (!animation) {
+                didStartAnimation = false;
+                return;
+              }
+              animation();
+            },
+          });
+
+          const card = entry.target.querySelector("[journey-card]");
+
+          tl.add({
+            targets: card,
+            opacity: 1,
+            easing: "linear",
+            duration: 350,
+          });
+        });
+
+        if (!didStartAnimation) {
+          didStartAnimation = true;
+          animationCallbacks.shift()!();
+        }
+      });
+    }, options);
+
+    journeyCards.forEach((card) => {
+      observer.observe(card);
+    });
+  }
+
+  attachIntersectionAnimations();
+  document.addEventListener("astro:after-swap", attachIntersectionAnimations);
+</script>

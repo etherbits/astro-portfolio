@@ -2,7 +2,7 @@ import { type APIRoute } from "astro";
 import { sendContactMail } from "../../lib/email";
 import { contactMeSchema } from "../../schemas/contactMe";
 
-export const prerender = false
+export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   const formData = await request.formData();

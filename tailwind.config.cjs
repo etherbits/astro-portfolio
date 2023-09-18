@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        'tall': { 'raw': '(min-height: 860px)' },
-        'taller': { 'raw': '(min-height: 980px)' },
+        tall: { raw: "(min-height: 860px)" },
+        taller: { raw: "(min-height: 980px)" },
       },
       lineHeight: {
         "clamp-xl": "clamp(2rem, 2.25vw, 3rem)",
@@ -39,14 +39,14 @@ module.exports = {
         ],
       },
       animation: {
-        'appear': "appear 0.5s ease-out"
+        appear: "appear 0.5s ease-out",
       },
       keyframes: {
         appear: {
           "0%": { opacity: 0 },
           "100%": { opacity: 1 },
-        }
-      }
+        },
+      },
     },
   },
   plugins: [],

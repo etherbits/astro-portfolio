@@ -1,8 +1,8 @@
 import { z } from "astro:content";
-import UnispaceImg from '../assets/images/unispace-laptop.webp'
-import SandroImg from '../assets/images/sandro-laptop.webp'
-import EBaseImg from '../assets/images/ebase-laptop.webp'
-import OctopusImg from '../assets/images/octopus-laptop.webp'
+import UnispaceImg from "../assets/images/unispace-laptop.webp";
+import SandroImg from "../assets/images/sandro-laptop.webp";
+import EBaseImg from "../assets/images/ebase-laptop.webp";
+import OctopusImg from "../assets/images/octopus-laptop.webp";
 
 export const commonDataSchema = z.object({
   title: z.string().min(1).max(128),

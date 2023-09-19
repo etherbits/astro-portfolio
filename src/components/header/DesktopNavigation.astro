@@ -27,7 +27,7 @@ const t = generateTranslator(lang!);
                 "text-slate-300":
                   path === `/${lang}${link.href}` ||
                   path === `/${lang}${link.href}/`,
-              })}
+              }, 'transition-colors hover:text-slate-200')}
             >
               {t(navTranslationKey)}
             </Link>

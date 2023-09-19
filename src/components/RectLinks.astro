@@ -51,7 +51,7 @@ const linkObjs = [
         <a
           href={link.url}
           class={cn(
-            "flex items-center justify-center overflow-hidden rounded-lg border border-slate-600 bg-neutral-950 hover:border-slate-300 w-10 h-10 sm:w-12 sm:h-12",
+            "flex items-center justify-center overflow-hidden transition-colors rounded-lg border border-slate-600 bg-neutral-950 hover:border-slate-300 w-10 h-10 sm:w-12 sm:h-12",
           )}
           target="_blank"
           aria-label="Resume/CV"
@@ -60,7 +60,7 @@ const linkObjs = [
           {link.imgType === "vector" ? (
             <Icon
               icon="Newspaper"
-              class="w-1/2 h-1/2 stroke-[1.5px] stroke-slate-500"
+              class="w-1/2 h-1/2 stroke-[1.5px] stroke-slate-400"
             />
           ) : (
             <Image

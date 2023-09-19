@@ -5,6 +5,7 @@ import Icon from "./Icon.astro";
 import GithubImg from "../assets/images/github.webp";
 import TwitterImg from "../assets/images/twitter.webp";
 import LinkedinImg from "../assets/images/linkedin.webp";
+import { getLangFromUrl, generateTranslator } from "../i18n/utils";
 
 interface Props {
   class?: string;
@@ -12,19 +13,30 @@ interface Props {
 
 const { props } = Astro;
 
+const lang = getLangFromUrl(Astro.url);
+const t = generateTranslator(lang!);
+
 const linkObjs = [
-  { vectorName: "Newspaper", imgType: "vector", url: "#" },
   {
+    title: t("link.resume"),
+    vectorName: "Newspaper",
+    imgType: "vector",
+    url: "https://drive.google.com/drive/folders/14x0hG6F0kpuoFUCMhTH0c2AWlmGg4Bpn?usp=sharing",
+  },
+  {
+    title: t("link.github"),
     imageSrc: GithubImg,
     imgType: "image",
     url: "https://github.com/etherbits",
   },
   {
+    title: t("link.twitter"),
     imageSrc: TwitterImg,
     imgType: "image",
     url: "https://twitter.com/etherbito",
   },
   {
+    title: t("link.linkedin"),
     imageSrc: LinkedinImg,
     imgType: "image",
     url: "https://www.linkedin.com/in/nika-qvrivishvili-126664203",
@@ -43,6 +55,7 @@ const linkObjs = [
           )}
           target="_blank"
           aria-label="Resume/CV"
+          title={link.title}
         >
           {link.imgType === "vector" ? (
             <Icon

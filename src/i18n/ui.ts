@@ -9,6 +9,10 @@ export type TranslationKey = keyof (typeof ui)[typeof defaultLang];
 
 export const ui = {
   en: {
+    "link.resume": "Go to my CV/Resume",
+    "link.github": "Go to my Github",
+    "link.twitter": "Go to my Twitter",
+    "link.linkedin": "Go to my Linkedin",
     "navigation.home": "Home",
     "navigation.projects": "Projects",
     "navigation.journey": "Journey",
@@ -39,6 +43,10 @@ export const ui = {
     "contact.contact_info_title": "Contact Info",
   },
   ka: {
+    "link.resume": "გადადი ჩემს CV/რეზიუმე-ზე",
+    "link.github": "გადადი ჩემს Github-ზე",
+    "link.twitter": "გადადი ჩემს Twitter-ზე",
+    "link.linkedin": "გადადი ჩემს Linkedin-ზე",
     "navigation.home": "მთავარი",
     "navigation.projects": "პროქეტები",
     "navigation.journey": "ჩემი გზა",

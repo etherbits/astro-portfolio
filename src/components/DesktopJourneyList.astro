@@ -88,7 +88,6 @@ const { props } = Astro;
       const dot = target.querySelector("[journey-dot]");
       const path = target.querySelectorAll("[journey-path] div");
       const isReversed = card?.getAttribute("is-reversed");
-      console.log(isReversed)
       animationCallbacks.push(() => {
         const tl = anime.timeline({
           complete: () => {

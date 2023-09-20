@@ -3,7 +3,6 @@ import Header from "../components/header/Header.astro";
 import { ViewTransitions } from "astro:transitions";
 import { getLangFromUrl } from "../i18n/utils";
 import { seo } from "../i18n/seo";
-import { fade } from "astro/transitions";
 
 interface Props {
   title: string;
@@ -25,6 +24,20 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href="https://nikaa.online/" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/Montserrat.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      as="font"
+      href="/fonts/NotoSansGeorgian.woff2"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
@@ -51,8 +64,7 @@ const { title } = Astro.props;
     <style is:global>
       @font-face {
         font-family: "Montserrat";
-        src: url("/fonts/Montserrat-VariableFont_wght.ttf")
-          format("truetype-variations");
+        src: url("/fonts/Montserrat.woff2") format("woff2");
         font-weight: 100 1000;
         unicode-range: U+0020-007F;
         font-display: swap;
@@ -60,8 +72,7 @@ const { title } = Astro.props;
 
       @font-face {
         font-family: "NotoSansGeorgian";
-        src: url("/fonts/NotoSansGeorgian-VariableFont_wdth,wght.ttf")
-          format("truetype-variations");
+        src: url("/fonts/NotoSansGeorgian.woff2") format("woff2");
         font-weight: 100 1000;
         unicode-range: U+10A0-10FF;
         font-display: swap;

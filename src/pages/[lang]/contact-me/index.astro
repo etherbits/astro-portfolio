@@ -32,9 +32,9 @@ const t = generateTranslator(lang);
     </div>
     <main class="pt-[4vh] px-[4vw] md:max-w-clamp-form md:pt-[7vh]">
       <form
+        id="contact-form"
         method="POST"
         class="mb-[4vh] flex w-full flex-col items-end gap-8 md:gap-10"
-        contact-form
       >
         <div class="flex w-full flex-col gap-8 md:flex-row md:gap-10">
           <Input
@@ -95,8 +95,6 @@ const t = generateTranslator(lang);
     new URL(window.location.href),
   ) as keyof typeof languages;
 
-  const contactForm = document.querySelector("[contact-form]");
-
   function changeStatus(message: string, type: "normal" | "error" | "success") {
     const statusMessageEl = document.getElementById(
       "status-message",
@@ -154,7 +152,15 @@ const t = generateTranslator(lang);
     changeStatus("Successfully sent your mail!", "success");
   }
 
-  contactForm?.addEventListener("submit", (e) => {
-    submit(e);
-  });
+  function attachFormSubmit() {
+    const contactForm = document.getElementById("contact-form");
+
+    contactForm?.addEventListener("submit", (e) => {
+      submit(e);
+    });
+  }
+
+  attachFormSubmit();
+
+  document.addEventListener("astro:after-swap", attachFormSubmit);
 </script>

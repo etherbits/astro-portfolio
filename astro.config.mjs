@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  site: "https://nikaa.online",
+  site: "https://nikadev.com",
   integrations: [tailwind(), prefetch(), sitemap()],
   redirects: {
     "/": "/en",

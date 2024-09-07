@@ -9,7 +9,7 @@ export type EmailData = {
 
 export async function sendContactMail(data: ContactMeFormData) {
   return sendMail({
-    from: "astro.portfolio@nikaa.online",
+    from: "astro.portfolio@nikadev.com",
     to: "nika.qvrivishvilipc@gmail.com",
     subject: "portfolio contact",
     html: `

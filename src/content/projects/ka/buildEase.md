@@ -1,9 +1,7 @@
 ---
 id: buildEase
-description: E-Base is a web application for managing TV shows and movies,
-  conceived as my final project for Harvard University's CS50 course.
-  The application retrieves data from The Movie Database (TMDB)
-  and enables users to curate their own media list linked to their account.
-  As the sole developer, I assumed responsibility for both the front-end
-  and back-end development of this project.
+description:  მე, როგორც CTO, წავუძეხი საერთაშორისო უძრავი ქონების პლატფორმის განვითარებას, რომლის სპეციალობა ქონების შეფასებაში,
+  გაყიდვებში, შესყიდვებსა და ინვესტიციებშია. Next.js-ისა და Tailwind CSS-ის გამოყენებით, ჩვენ 
+  უზრუნველვყავით ადრეული სტარტაპის მზარდი მოთხოვნებისთვის სწრაფი ადაპტაცია. ბიზნესის მასშტაბის ზრდასთან ერთად, ჩავრთეთ Turso, 
+  რათა ეფექტურად დაგვეკმაყოფილებინა მონაცემთა ბაზის მზარდი მოთხოვნები. 
 ---

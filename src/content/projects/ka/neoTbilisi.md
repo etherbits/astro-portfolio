@@ -1,9 +1,6 @@
 ---
 id: neoTbilisi
-description: E-Base is a web application for managing TV shows and movies,
-  conceived as my final project for Harvard University's CS50 course.
-  The application retrieves data from The Movie Database (TMDB)
-  and enables users to curate their own media list linked to their account.
-  As the sole developer, I assumed responsibility for both the front-end
-  and back-end development of this project.
+description: ნეო თბილისი არის ვებაპლიკაცია, რომელიც შექმნილია ქართული ენისა და კულტურის მცოდნე AI მოდელებთან სასაუბროდ.
+  ის იყენებს Next.js-ს front-ის ფუნქციონალისთვის, Flask და Python-ს ბექისთვის.
+  ჩვენ გამოვიყენეთ  route handler-ები Next.js-ში, რათა გაგვესტრიმა მონაცემები Flask API-დან clinet-ზე
 ---

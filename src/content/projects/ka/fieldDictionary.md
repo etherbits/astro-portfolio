@@ -1,9 +1,7 @@
 ---
 id: fieldDictionary
-description: E-Base is a web application for managing TV shows and movies,
-  conceived as my final project for Harvard University's CS50 course.
-  The application retrieves data from The Movie Database (TMDB)
-  and enables users to curate their own media list linked to their account.
-  As the sole developer, I assumed responsibility for both the front-end
-  and back-end development of this project.
+description: ეს web აპლიკაცია ეხმარება ლინგვისტებს სხვადასხვა ენისა და სფეროს ტერმინების ძიებაში, ფილტრაციაში,
+  შენახვაში და ზოგადად მართვაში. ჩვენმა გუნდმა გადაწყვიტა server rendered არქიტექტურაზე დაყრდნობით მუშაობა,
+  რაც გულისხმობს Flask სერვერიდან პირდაპირ HTML შაბლონების გზავნას client-ზე. ამ მიდგომამ მოგვცა შესაძლებლობა გვემუშავა უფრო 
+  სწრაფად და გაგვეტესტა მრავალი აპლიკაციის ვარიაცია.
 ---

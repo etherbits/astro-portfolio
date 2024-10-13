@@ -1,9 +1,8 @@
 ---
 id: eElections
-description: E-Base is a web application for managing TV shows and movies,
-  conceived as my final project for Harvard University's CS50 course.
-  The application retrieves data from The Movie Database (TMDB)
-  and enables users to curate their own media list linked to their account.
-  As the sole developer, I assumed responsibility for both the front-end
-  and back-end development of this project.
+description: I developed an informational website with dynamic animations to 
+  explain all the key details about the Gerogian 2024 election process.
+  To ensure quick development and fast page loads, we used Astro,
+  and for precise, high-quality animations, we utilized GSAP,
+  which allowed us to match the exact specifications requested by the client.
 ---

@@ -89,7 +89,7 @@ export const commonData = {
     image: EElectionsImg,
     repoLink: "https://github.com/etherbits/e-elections",
     websiteLink: "https://e-elections.pages.dev/en/",
-    tags: ["Astro", "Typescript", "CSS", "I18", "GSAP"],
+    tags: ["Astro", "Typescript", "CSS", "I18N", "GSAP"],
     order: 6,
   },
   fieldDictionary: {
